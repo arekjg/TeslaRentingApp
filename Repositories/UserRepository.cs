@@ -11,14 +11,12 @@ namespace TeslaRentingApp
             _context = context;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> CreateUser(User user)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        }
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
-        public async Task<List<User>> GetUsers()
-        {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
         }
     }
 }

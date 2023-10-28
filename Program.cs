@@ -13,6 +13,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IModelRepository, ModelRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // Add Swagger for testing
 builder.Services.AddEndpointsApiExplorer();

@@ -12,8 +12,6 @@ namespace TeslaRentingApp
         public string LastName { get; set; }
         [Column("Usr_Email")]
         public string Email { get; set; }
-        [Column("Usr_Identification")]
-        public string Identification { get; set; }
         [Column("Usr_Phone")]
         public string Phone { get; set; }
     }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { getModels } from "../fetcher";
 
 const Models = () => {

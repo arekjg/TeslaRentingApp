@@ -1,6 +1,6 @@
 const baseURL = "https://localhost:7292/";
 
-const fetcher = async (url) => {
+const fetcherGet = async (url) => {
   let responseObject = { errorMessage: "", data: [] };
   try {
     const response = await fetch(baseURL + url);
@@ -16,18 +16,52 @@ const fetcher = async (url) => {
   return responseObject;
 };
 
+const fetcherPost = async (url, data) => {
+  let responseObject = { errorMessage: "", data: {} };
+  try {
+    const response = await fetch(baseURL + url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP Error ${response.status}`);
+    }
+    const responseData = await response.json();
+    responseObject.errorMessage = "";
+    responseObject.data = responseData;
+  } catch (error) {
+    responseObject.errorMessage = error.message;
+  }
+  return responseObject;
+};
+
 export const getCars = () => {
-  return fetcher("api/cars");
+  return fetcherGet("api/cars");
 };
 
 export const getLocations = () => {
-  return fetcher("api/locations");
+  return fetcherGet("api/locations");
 };
 
 export const getModels = () => {
-  return fetcher("api/models");
+  return fetcherGet("api/models");
+};
+
+export const getModel = (id) => {
+  return fetcherGet(`api/models/${id}`);
 };
 
 export const getReservations = () => {
-  return fetcher("api/reservations");
+  return fetcherGet("api/reservations");
+};
+
+export const postReservation = (data) => {
+  return fetcherPost("api/reservations", data);
+};
+
+export const postUser = (data) => {
+  return fetcherPost("api/users", data);
 };

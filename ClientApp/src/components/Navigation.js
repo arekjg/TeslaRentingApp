@@ -3,16 +3,15 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <>
-      <div>Tesla Renting System</div>
-      <div>
-        <Link to="/">Home</Link>
+    <div className="nav-bar">
+      <div className="column left">
+        <Link to="/">TESLA</Link>
       </div>
 
-      <div>
-        <Link to="/models">Models</Link>
-      </div>
-    </>
+      <div className="column middle"></div>
+
+      <div className="column right"></div>
+    </div>
   );
 };
 

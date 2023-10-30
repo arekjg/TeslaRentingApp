@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Cars from "./components/Cars";
 import Confirmation from "./components/Confirmation";
 import User from "./components/User";
+import Summary from "./components/Summary";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/cars" element={<Cars />} />
           <Route path="/user" element={<User />} />
           <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/summary" element={<Summary />} />
         </Route>
       </Routes>
     </BrowserRouter>

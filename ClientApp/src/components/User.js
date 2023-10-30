@@ -9,6 +9,13 @@ const User = () => {
     phone: "",
   });
 
+  const [formErrors, setFormErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
+
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -20,8 +27,8 @@ const User = () => {
   const id = queryParams.get("model");
 
   const handleFormChange = (e) => {
-    const { name, value } = e.target;
-
+    let { name, value } = e.target;
+    
     setForm((prevState) => {
       return {
         ...prevState,
@@ -30,12 +37,36 @@ const User = () => {
     });
   };
 
-  const handleNext = () => {
-    // TODO - validation
+  const handleNext = (e) => {
+    e.preventDefault();
 
-    navigate(
-      `/confirmation?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}&firstName=${form.firstName}&lastName=${form.lastName}&email=${form.email}&phone=${form.phone}`
-    );
+    let isValid = true;
+    const updatedFormErrors = { ...formErrors };
+
+    if (form.firstName === null || form.firstName === "") {
+      updatedFormErrors.firstName = "You must enter your name";
+      isValid = false;
+    }
+    if (form.lastName === null || form.lastName === "") {
+      updatedFormErrors.lastName = "You must enter your last name";
+      isValid = false;
+    }
+    if (form.email === null || form.email === "") {
+      updatedFormErrors.email = "You must enter your email address";
+      isValid = false;
+    }
+    if (form.phone === null || form.phone === "") {
+      updatedFormErrors.phone = "You must enter your phone number";
+      isValid = false;
+    }
+
+    setFormErrors(updatedFormErrors);
+
+    if (isValid) {
+      navigate(
+        `/confirmation?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}&firstName=${form.firstName}&lastName=${form.lastName}&email=${form.email}&phone=${form.phone}`
+      );
+    }
   };
 
   return (
@@ -50,7 +81,11 @@ const User = () => {
             onChange={handleFormChange}
             required
           ></input>
+          {formErrors.firstName && (
+            <span className="error-message">{formErrors.firstName}</span>
+          )}
         </div>
+
         <div>
           <label>Last name:</label>
           <input
@@ -60,7 +95,11 @@ const User = () => {
             onChange={handleFormChange}
             required
           ></input>
+          {formErrors.lastName && (
+            <span className="error-message">{formErrors.lastName}</span>
+          )}
         </div>
+
         <div>
           <label>Email address:</label>
           <input
@@ -70,7 +109,11 @@ const User = () => {
             onChange={handleFormChange}
             required
           ></input>
+          {formErrors.email && (
+            <span className="error-message">{formErrors.email}</span>
+          )}
         </div>
+
         <div>
           <label>Phone #:</label>
           <input
@@ -80,6 +123,9 @@ const User = () => {
             onChange={handleFormChange}
             required
           ></input>
+          {formErrors.phone && (
+            <span className="error-message">{formErrors.phone}</span>
+          )}
         </div>
         <button onClick={handleNext}>Next</button>
       </form>

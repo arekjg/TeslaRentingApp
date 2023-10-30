@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getModel, postReservation } from "../fetcher";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Confirmation = () => {
   const [model, setModel] = useState({
@@ -10,6 +10,9 @@ const Confirmation = () => {
       name: "",
       pricePerDay: null,
       imageName: "",
+      seats: "",
+      capacity: "",
+      range: "",
     },
   });
 
@@ -30,7 +33,7 @@ const Confirmation = () => {
   const email = queryParams.get("email");
   const phone = queryParams.get("phone");
 
-  const carData = {
+  const reservationData = {
     carId: id,
     userId: null,
     dateStart: pickUpDate,
@@ -38,7 +41,7 @@ const Confirmation = () => {
     locIdStart: pickUpLocation,
     locIdEnd: returnLocation,
     cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2)),
-  }
+  };
 
   const userData = {
     firstName: firstName,
@@ -47,10 +50,12 @@ const Confirmation = () => {
     phone: phone,
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
-      const responseObject = await getModel(id);
-      setModel(responseObject);
+      const modelResponseObject = await getModel(id);
+      setModel(modelResponseObject);
     };
     fetchData();
   }, [id]);
@@ -58,7 +63,7 @@ const Confirmation = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
 
-    const userResponse = await fetch("https://localhost:7292/api/users", {
+    const userResponseObject = await fetch("https://localhost:7292/api/users", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -66,9 +71,10 @@ const Confirmation = () => {
       },
     }).then((resp) => resp.json());
 
-    carData.userId = userResponse.id;
+    reservationData.userId = userResponseObject.id;
+    const reservationResponseObject = await postReservation(reservationData);
 
-    postReservation(carData);
+    navigate(`/summary?reservationId=${reservationResponseObject.data.id}`);
   };
 
   return (

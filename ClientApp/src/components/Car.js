@@ -6,6 +6,9 @@ const Car = ({
   name,
   price,
   imageName,
+  seats,
+  capacity,
+  range,
   pickUpDateString,
   returnDateString,
   pickUpLocation,
@@ -28,7 +31,12 @@ const Car = ({
       <div className="car-image">
         <img src={`../images/${imageName}`} alt={name} />
       </div>
-      <div className="car-details">{name}</div>
+      <div className="car-details">
+        <p>{name}</p>
+        <p>Seats: {seats}</p>
+        <p>Capacity: {capacity} cu ft</p>
+        <p>Range: {range} mi</p>
+      </div>
       <div className="car-price">
         <p>{price.toFixed(2)} &euro;/day</p>
         <p>{(daysCount * price).toFixed(2)} &euro; TOTAL</p>

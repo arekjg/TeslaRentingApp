@@ -12,5 +12,11 @@ namespace TeslaRentingApp
         public decimal PricePerDay { get; set; }
         [Column("Mod_Image")]
         public string ImageName { get; set; }
+        [Column("Mod_Seats")]
+        public int Seats { get; set; }
+        [Column("Mod_Capacity")]
+        public int Capacity { get; set; }
+        [Column("Mod_Range")]
+        public int Range { get; set; }
     }
 }

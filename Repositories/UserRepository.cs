@@ -18,5 +18,10 @@ namespace TeslaRentingApp
 
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
         }
+
+        public async Task<User> GetUser(int id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
     }
 }

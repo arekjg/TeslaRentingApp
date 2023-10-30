@@ -5,14 +5,17 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const today = new Date().toISOString().substring(0, 10);
   const [locations, setLocations] = useState({ errorMessage: "", data: [] });
-  const [pickUpDate, setPickUpDate] = useState();
-  const [returnDate, setReturnDate] = useState();
   const [minReturnDate, setMinReturnDate] = useState(today);
   const [form, setForm] = useState({
     pickUpLocation: null,
     returnLocation: null,
-    pickUpDate: null,
-    returnDate: null,
+    pickUpDate: today,
+    returnDate: today,
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    pickUpLocation: "",
+    returnLocation: "",
   });
 
   const navigate = useNavigate();
@@ -26,42 +29,55 @@ const Home = () => {
   }, []);
 
   const handlePickUpDate = (e) => {
-    setPickUpDate(e.target.value);
     setMinReturnDate(e.target.value);
     setForm({ ...form, pickUpDate: e.target.value });
   };
 
   const handleReturnDate = (e) => {
-    setReturnDate(e.target.value);
     setForm({ ...form, returnDate: e.target.value });
   };
 
   const handlePickUpLocation = (e) => {
     setForm({ ...form, pickUpLocation: e.target.value });
+    setFormErrors({ ...formErrors, pickUpLocation: "" });
   };
 
   const handleReturnLocation = (e) => {
     setForm({ ...form, returnLocation: e.target.value });
+    setFormErrors({ ...formErrors, returnLocation: "" });
   };
 
-  const handleSearch = () => {
-    if (form.pickUpLocation === "" || form.returnLocation === "") {
-      // TODO - validation
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    let isValid = true;
+    const updatedFormErrors = { ...formErrors };
+
+    if (form.pickUpLocation === null || form.pickUpLocation === "") {
+      updatedFormErrors.pickUpLocation = "You must choose a location";
+      isValid = false;
+    }
+    if (form.returnLocation === null || form.returnLocation === "") {
+      updatedFormErrors.returnLocation = "You must choose a location";
+      isValid = false;
     }
 
-    navigate(
-      `/cars?pickUpLocation=${form.pickUpLocation}&returnLocation=${form.returnLocation}&pickUpDate=${form.pickUpDate}&returnDate=${form.returnDate}`
-    );
+    setFormErrors(updatedFormErrors);
+
+    if (isValid) {
+      navigate(
+        `/cars?pickUpLocation=${form.pickUpLocation}&returnLocation=${form.returnLocation}&pickUpDate=${form.pickUpDate}&returnDate=${form.returnDate}`
+      );
+    }
   };
 
   const rednerLocationsSelect = () => {
     return (
       <div>
         <select
-          className="location-picker"
+          className={`location-picker ${formErrors.pickUpLocation && "error"}`}
           name="pick-up-location"
           onChange={handlePickUpLocation}
-          required
         >
           <option value="">Choose a location</option>
           {locations.data.map((location) => (
@@ -70,12 +86,14 @@ const Home = () => {
             </option>
           ))}
         </select>
-        <span className="error-message">You must choose a location</span>
+        {formErrors.pickUpLocation && (
+          <span className="error-message">{formErrors.pickUpLocation}</span>
+        )}
+
         <select
-          className="location-picker"
+          className={`location-picker ${formErrors.pickUpLocation && "error"}`}
           name="return-location"
           onChange={handleReturnLocation}
-          required
         >
           <option value="">Choose a location</option>
           {locations.data.map((location) => (
@@ -84,7 +102,9 @@ const Home = () => {
             </option>
           ))}
         </select>
-        <span className="error-message">You must choose a location</span>
+        {formErrors.returnLocation && (
+          <span className="error-message">{formErrors.returnLocation}</span>
+        )}
       </div>
     );
   };
@@ -105,19 +125,17 @@ const Home = () => {
           type="date"
           name="pick-up-date"
           placeholder="Choose a date"
-          defaultValue={pickUpDate}
+          defaultValue={form.pickUpDate}
           onChange={handlePickUpDate}
           min={today}
-          required
         />
         <input
           type="date"
           name="return-date"
           placeholder="Choose a date"
-          defaultValue={returnDate}
+          defaultValue={form.returnDate}
           onChange={handleReturnDate}
           min={minReturnDate}
-          required
         />
       </div>
       <div className="search-btn">

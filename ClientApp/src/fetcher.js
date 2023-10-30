@@ -46,6 +46,10 @@ export const getLocations = () => {
   return fetcherGet("api/locations");
 };
 
+export const getLocation = (id) => {
+  return fetcherGet(`api/locations/${id}`)
+}
+
 export const getModels = () => {
   return fetcherGet("api/models");
 };
@@ -56,6 +60,14 @@ export const getModel = (id) => {
 
 export const getReservations = () => {
   return fetcherGet("api/reservations");
+};
+
+export const getReservation = (id) => {
+  return fetcherGet(`api/reservations/${id}`);
+};
+
+export const getUser = (id) => {
+  return fetcherGet(`api/users/${id}`);
 };
 
 export const postReservation = (data) => {

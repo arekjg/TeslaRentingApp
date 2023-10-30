@@ -31,6 +31,9 @@ const Cars = () => {
             name={model.name}
             price={model.pricePerDay}
             imageName={model.imageName}
+            seats={model.seats}
+            capacity={model.capacity}
+            range={model.range}
             pickUpDateString={pickUpDateString}
             returnDateString={returnDateString}
             pickUpLocation={pickUpLocation}

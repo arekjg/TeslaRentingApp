@@ -1,4 +1,4 @@
-const baseURL = "https://localhost:7292/";
+export const baseURL = "https://localhost:7292/";
 
 const fetcherGet = async (url) => {
   let responseObject = { errorMessage: "", data: [] };

@@ -28,7 +28,7 @@ const User = () => {
 
   const handleFormChange = (e) => {
     let { name, value } = e.target;
-    
+
     setForm((prevState) => {
       return {
         ...prevState,
@@ -71,12 +71,14 @@ const User = () => {
 
   return (
     <div className="user-container">
+      <h3>Driver's credentials</h3>
       <form>
         <div>
           <label>First name:</label>
           <input
             type="text"
             name="firstName"
+            className={`${formErrors.firstName && "error"}`}
             placeholder="First name"
             onChange={handleFormChange}
             required
@@ -91,6 +93,7 @@ const User = () => {
           <input
             type="text"
             name="lastName"
+            className={`${formErrors.lastName && "error"}`}
             placeholder="Last name"
             onChange={handleFormChange}
             required
@@ -105,6 +108,7 @@ const User = () => {
           <input
             type="text"
             name="email"
+            className={`${formErrors.email && "error"}`}
             placeholder="Email address"
             onChange={handleFormChange}
             required
@@ -119,6 +123,7 @@ const User = () => {
           <input
             type="text"
             name="phone"
+            className={`${formErrors.phone && "error"}`}
             placeholder="Phone #"
             onChange={handleFormChange}
             required
@@ -127,7 +132,9 @@ const User = () => {
             <span className="error-message">{formErrors.phone}</span>
           )}
         </div>
-        <button onClick={handleNext}>Next</button>
+        <div className="btn-right">
+          <button onClick={handleNext}>Next</button>
+        </div>
       </form>
     </div>
   );

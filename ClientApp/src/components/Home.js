@@ -73,10 +73,15 @@ const Home = () => {
 
   const rednerLocationsSelect = () => {
     return (
-      <div>
+      <>
+        <label className="search-header location-header" id="pickUp">
+          Pick up location
+        </label>
+
         <select
           className={`location-picker ${formErrors.pickUpLocation && "error"}`}
           name="pick-up-location"
+          id="pickUp"
           onChange={handlePickUpLocation}
         >
           <option value="">Choose a location</option>
@@ -87,12 +92,19 @@ const Home = () => {
           ))}
         </select>
         {formErrors.pickUpLocation && (
-          <span className="error-message">{formErrors.pickUpLocation}</span>
+          <span className="error-message location-error" id="pickUp">
+            {formErrors.pickUpLocation}
+          </span>
         )}
 
+        <label className="search-header location-header" id="return">
+          Return location
+        </label>
+
         <select
-          className={`location-picker ${formErrors.pickUpLocation && "error"}`}
+          className={`location-picker ${formErrors.returnLocation && "error"}`}
           name="return-location"
+          id="return"
           onChange={handleReturnLocation}
         >
           <option value="">Choose a location</option>
@@ -103,42 +115,49 @@ const Home = () => {
           ))}
         </select>
         {formErrors.returnLocation && (
-          <span className="error-message">{formErrors.returnLocation}</span>
+          <span className="error-message location-error" id="return">
+            {formErrors.returnLocation}
+          </span>
         )}
-      </div>
+      </>
     );
   };
 
   return (
     <form className="search-form-container">
-      <div className="search-header">
-        <label>Pick up & Return location</label>
-      </div>
+      <h3>Looking for an electric car? You're in the right place!</h3>
 
       {locations && rednerLocationsSelect()}
 
-      <div className="search-header">
-        <label>Pick up & Return date</label>
-      </div>
-      <div>
-        <input
-          type="date"
-          name="pick-up-date"
-          placeholder="Choose a date"
-          defaultValue={form.pickUpDate}
-          onChange={handlePickUpDate}
-          min={today}
-        />
-        <input
-          type="date"
-          name="return-date"
-          placeholder="Choose a date"
-          defaultValue={form.returnDate}
-          onChange={handleReturnDate}
-          min={minReturnDate}
-        />
-      </div>
-      <div className="search-btn">
+      <label className="search-header date-header" id="pickUp">
+        Pick up date
+      </label>
+      <label className="search-header date-header" id="return">
+        Return date
+      </label>
+
+      <input
+        type="date"
+        name="pick-up-date"
+        className="date-picker"
+        id="pickUp"
+        placeholder="Choose a date"
+        defaultValue={form.pickUpDate}
+        onChange={handlePickUpDate}
+        min={today}
+      />
+      <input
+        type="date"
+        name="return-date"
+        className="date-picker"
+        id="return"
+        placeholder="Choose a date"
+        defaultValue={form.returnDate}
+        onChange={handleReturnDate}
+        min={minReturnDate}
+      />
+
+      <div className="btn-right">
         <button onClick={handleSearch}>Search</button>
       </div>
     </form>

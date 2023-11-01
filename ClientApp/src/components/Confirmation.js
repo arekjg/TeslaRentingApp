@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getModel, postReservation } from "../fetcher";
+import { baseURL, getModel, postReservation } from "../fetcher";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Confirmation = () => {
@@ -63,7 +63,7 @@ const Confirmation = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
 
-    const userResponseObject = await fetch("https://localhost:7292/api/users", {
+    const userResponseObject = await fetch(baseURL + "api/users", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -85,7 +85,9 @@ const Confirmation = () => {
       <div className="car-details">{model.data.name}</div>
       <div className="car-price">
         <p>{(daysCount * model.data.pricePerDay).toFixed(2)} &euro; TOTAL</p>
-        <button onClick={handleConfirm}>Confirm</button>
+        <div className="btn-right">
+          <button onClick={handleConfirm}>Confirm</button>
+        </div>
       </div>
     </div>
   );

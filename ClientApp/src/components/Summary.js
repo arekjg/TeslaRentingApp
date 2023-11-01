@@ -107,7 +107,7 @@ const Summary = () => {
 
   return (
     <div className="summary-container">
-      <h2>Your reservation is saved!</h2>
+      <h2>Thank you for your reservation!</h2>
       <div className="car-summary">
         <p>Car details</p>
         <div className="car-image">
@@ -138,7 +138,9 @@ const Summary = () => {
         </p>
         <p>Email: {user.data.email}</p>
         <p>Phone: {user.data.phone}</p>
-        <button onClick={() => navigate("/")}>Home</button>
+        <div className="btn-right">
+          <button onClick={() => navigate("/")}>Home</button>
+        </div>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const Cars = () => {
   const rednerCars = () => {
     return (
       <div className="cars-list">
-        {models.data.map((model) => (
+        {models.data.sort((a, b) => a.pricePerDay - b.pricePerDay).map((model) => (
           <Car
             key={model.id}
             id={model.id}

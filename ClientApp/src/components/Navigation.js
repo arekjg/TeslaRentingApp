@@ -5,12 +5,18 @@ const Navigation = () => {
   return (
     <div className="nav-bar">
       <div className="column left">
-        <Link to="/">TESLA</Link>
+        <Link to="/">
+          <img src={"../images/tesla_logo_400x400.png"} alt="logo" />
+        </Link>
       </div>
 
-      <div className="column middle"></div>
+      <div className="column middle">
+        <Link to="/">
+          <img src={"../images/tesla_logo_400x60.png"} alt="logo2" />
+        </Link>
+      </div>
 
-      <div className="column right"></div>
+      <div className="column right">BLANK</div>
     </div>
   );
 };

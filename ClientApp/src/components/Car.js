@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { SeatIcon, RangeIcon, CapacityIcon } from "./Icons";
 
 const Car = ({
   id,
@@ -32,13 +33,28 @@ const Car = ({
         <img src={`../images/${imageName}`} alt={name} />
       </div>
       <div className="car-details">
-        <p>{name}</p>
-        <p>Seats: {seats}</p>
-        <p>Capacity: {capacity} cu ft</p>
-        <p>Range: {range} mi</p>
+        <p>
+          <span className="text-model-name">{name}</span>
+        </p>
+        <p className="text-details">
+          <span title="Number of seats">
+            <SeatIcon />
+            {seats}
+          </span>
+          &emsp;
+          <span title="Cargo Capacity">
+            <CapacityIcon />
+            {capacity} cu ft&emsp;
+          </span>
+          <span title="Range">
+            <RangeIcon /> {range} mi
+          </span>
+        </p>
       </div>
       <div className="car-price">
-        <p>{price.toFixed(2)} &euro;/day</p>
+        <p>
+          <span className="text-price-1">{price.toFixed(2)} &euro;</span>/day
+        </p>
         <p>{(daysCount * price).toFixed(2)} &euro; TOTAL</p>
         <button onClick={handleReservation}>Select</button>
       </div>

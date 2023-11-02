@@ -22,16 +22,16 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occured: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetReservationById(int id)
+        [HttpGet("{uuid}")]
+        public async Task<IActionResult> GetReservationByUuid(string uuid)
         {
             try
             {
-                Reservation reservation = await _reservationRepository.GetReservation(id);
+                Reservation reservation = await _reservationRepository.GetReservation(uuid);
 
                 if (reservation != null)
                 {
@@ -44,26 +44,33 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occured: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> PostReservation(Reservation reservation)
         {
-            return Ok(await _reservationRepository.CreateReservation(reservation));
+            try
+            {
+                return Ok(await _reservationRepository.CreateReservation(reservation));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+            }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReservation(int id)
+        [HttpDelete("{uuid}")]
+        public async Task<IActionResult> DeleteReservation(string uuid)
         {
             try
             {
-                Reservation reservation = await _reservationRepository.GetReservation(id);
+                Reservation reservation = await _reservationRepository.GetReservation(uuid);
 
                 if (reservation != null)
                 {
-                    return Ok(await _reservationRepository.DeleteReservation(id));
+                    return Ok(await _reservationRepository.DeleteReservation(uuid));
                 }
                 else
                 {
@@ -72,18 +79,8 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occured: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
             }
         }
-
-        [HttpPut]
-        public async Task<IActionResult> PutReservation(Reservation reservation)
-        {
-            return Ok(await _reservationRepository.UpdateReservation(reservation));
-        }
-
-
-
-
     }
 }

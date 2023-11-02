@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getReservation, getModel, getUser, getLocation } from "../fetcher";
+import { baseURL, getLocation, getModel, postReservation } from "../fetcher";
+import { SeatIcon, RangeIcon, CapacityIcon } from "./Icons";
 
 const Summary = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const id = parseInt(queryParams.get("reservationId"));
-
-  const [reservation, setReservation] = useState({
+  const [startLocation, setStartLocation] = useState({
     errorMessage: "",
-    data: {
-      id: id,
-      carId: "",
-      userId: "",
-      dateStart: "",
-      dateEnd: "",
-      locIdStart: "",
-      locIdEnd: "",
-      cost: "",
-    },
+    data: [],
+  });
+  const [endLocation, setEndLocation] = useState({
+    errorMessage: "",
+    data: [],
   });
 
   const [model, setModel] = useState({
@@ -34,113 +26,152 @@ const Summary = () => {
     },
   });
 
-  const [user, setUser] = useState({
-    errorMessage: "",
-    data: {
-      id: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-    },
-  });
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const pickUpDateString = queryParams.get("pickUpDate");
+  const returnDateString = queryParams.get("returnDate");
+  const pickUpLocation = parseInt(queryParams.get("pickUpLocation"));
+  const returnLocation = parseInt(queryParams.get("returnLocation"));
+  const modelId = parseInt(queryParams.get("model"));
 
-  const [startLocation, setStartLocation] = useState({
-    errorMessage: "",
-    data: {
-      id: "",
-      name: "",
-    },
-  });
+  const pickUpDate = Date.parse(pickUpDateString) / 1000 / 60 / 60 / 24;
+  const returnDate = Date.parse(returnDateString) / 1000 / 60 / 60 / 24;
+  const daysCount = returnDate - pickUpDate + 1;
 
-  const [endLocation, setEndLocation] = useState({
-    errorMessage: "",
-    data: {
-      id: "",
-      name: "",
-    },
-  });
+  const firstName = queryParams.get("firstName");
+  const lastName = queryParams.get("lastName");
+  const email = queryParams.get("email");
+  const phone = queryParams.get("phone");
+
+  const reservationData = {
+    carId: modelId,
+    userId: null,
+    dateStart: pickUpDate,
+    dateEnd: returnDate,
+    locIdStart: pickUpLocation,
+    locIdEnd: returnLocation,
+    cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2)),
+    uuid: "",
+  };
+
+  const userData = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    phone: phone,
+  };
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchReservationData = async () => {
-      const reservationResponseObject = await getReservation(id);
-      setReservation(reservationResponseObject);
-    };
-    fetchReservationData();
-
     const fetchModelData = async () => {
-      const modelResponseObject = await getModel(reservation.data.carId);
+      const modelResponseObject = await getModel(modelId);
       setModel(modelResponseObject);
     };
     fetchModelData();
 
-    const fetchUserData = async () => {
-      const userResponseObject = await getUser(reservation.data.userId);
-      setUser(userResponseObject);
-    };
-    fetchUserData();
-
     const fetchStartLocationData = async () => {
-      const startLocationResponseObject = await getLocation(
-        reservation.data.locIdStart
-      );
-      setStartLocation(startLocationResponseObject);
+      const startLocResponseObject = await getLocation(pickUpLocation);
+      setStartLocation(startLocResponseObject);
     };
     fetchStartLocationData();
 
     const fetchEndLocationData = async () => {
-      const endLocationResponseObject = await getLocation(
-        reservation.data.locIdEnd
-      );
-      setEndLocation(endLocationResponseObject);
+      const returnLocResponseObject = await getLocation(returnLocation);
+      setEndLocation(returnLocResponseObject);
     };
     fetchEndLocationData();
-  }, [
-    id,
-    reservation.data.carId,
-    reservation.data.userId,
-    reservation.data.locIdStart,
-    reservation.data.locIdEnd,
-  ]);
+  }, [modelId, pickUpLocation, returnLocation]);
+
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+
+    const userResponseObject = await fetch(baseURL + "api/users", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((resp) => resp.json());
+
+    reservationData.userId = userResponseObject.id;
+
+    const uuid = generateUUID();
+    reservationData.uuid = uuid;
+
+    const reservationResponseObject = await postReservation(reservationData);
+
+    navigate(
+      `/reservation?uuid=${reservationResponseObject.data.uuid}`
+    );
+  };
+
+  const generateUUID = () => {
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
+      (
+        c ^
+        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+      ).toString(16)
+    );
+  };
 
   return (
     <div className="summary-container">
-      <h2>Thank you for your reservation!</h2>
+      <h3>Reservation summary</h3>
+
       <div className="car-summary">
-        <p>Car details</p>
+        <h4>{model.data.name}</h4>
         <div className="car-image">
-          {" "}
           <img
             src={`../images/${model.data.imageName}`}
             alt={model.data.name}
           />
         </div>
-        <p>Seats: {model.data.seats}</p>
-        <p>Capacity: {model.data.capacity}</p>
-        <p>Range: {model.data.range}</p>
+
+        <p className="text-details">
+          <span title="Number of seats">
+            <SeatIcon />
+            {model.data.seats}
+          </span>
+          &emsp;
+          <span title="Cargo Capacity">
+            <CapacityIcon />
+            {model.data.capacity} cu ft&emsp;
+          </span>
+          <span title="Range">
+            <RangeIcon /> {model.data.range} mi
+          </span>
+        </p>
       </div>
+
+      <div className="user-summary">
+        <p>
+          Name:{" "}
+          <strong>
+            {firstName} {lastName}
+          </strong>
+        </p>
+        <p>
+          Email: <strong>{email}</strong>
+        </p>
+        <p>
+          Phone: <strong>{phone}</strong>
+        </p>
+      </div>
+
       <div className="reservation-summary">
         <p>
-          You pick the car from {startLocation.data.name} on{" "}
-          {reservation.data.dateStart}
+          Pick up: <strong>{pickUpDateString}</strong> in{" "}
+          <strong>{startLocation.data.name}</strong>
         </p>
         <p>
-          You return the car in {endLocation.data.name} on{" "}
-          {reservation.data.dateStart}
+          Return: <strong>{returnDateString}</strong> in{" "}
+          <strong>{endLocation.data.name}</strong>
         </p>
       </div>
-      <div className="user-summary">
-        <h4>Your data:</h4>
-        <p>
-          Name: {user.data.firstName} {user.data.lastName}
-        </p>
-        <p>Email: {user.data.email}</p>
-        <p>Phone: {user.data.phone}</p>
-        <div className="btn-right">
-          <button onClick={() => navigate("/")}>Home</button>
-        </div>
+
+      <div className="btn-right">
+        <button onClick={handleConfirm}>Confirm</button>
       </div>
     </div>
   );

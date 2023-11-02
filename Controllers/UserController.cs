@@ -30,14 +30,21 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occured: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> PostUser(User user)
         {
-            return Ok(await _userRepository.CreateUser(user));
+            try
+            {
+                return Ok(await _userRepository.CreateUser(user));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+            }
         }
     }
 }

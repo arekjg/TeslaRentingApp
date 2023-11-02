@@ -40,6 +40,16 @@ const User = () => {
   const handleNext = (e) => {
     e.preventDefault();
 
+    let isValid = validateForm();
+
+    if (isValid) {
+      navigate(
+        `/summary?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}&firstName=${form.firstName}&lastName=${form.lastName}&email=${form.email}&phone=${form.phone}`
+      );
+    }
+  };
+
+  const validateForm = () => {
     let isValid = true;
     const updatedFormErrors = { ...formErrors };
 
@@ -61,82 +71,81 @@ const User = () => {
     }
 
     setFormErrors(updatedFormErrors);
-
-    if (isValid) {
-      navigate(
-        `/confirmation?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}&firstName=${form.firstName}&lastName=${form.lastName}&email=${form.email}&phone=${form.phone}`
-      );
-    }
+    return isValid;
   };
 
   return (
-    <div className="user-container">
+    <form className="user-container">
       <h3>Driver's credentials</h3>
-      <form>
-        <div>
-          <label>First name:</label>
-          <input
-            type="text"
-            name="firstName"
-            className={`${formErrors.firstName && "error"}`}
-            placeholder="First name"
-            onChange={handleFormChange}
-            required
-          ></input>
-          {formErrors.firstName && (
-            <span className="error-message">{formErrors.firstName}</span>
-          )}
-        </div>
 
-        <div>
-          <label>Last name:</label>
-          <input
-            type="text"
-            name="lastName"
-            className={`${formErrors.lastName && "error"}`}
-            placeholder="Last name"
-            onChange={handleFormChange}
-            required
-          ></input>
-          {formErrors.lastName && (
-            <span className="error-message">{formErrors.lastName}</span>
-          )}
-        </div>
+      <label className="first-name-label">First name:</label>
 
-        <div>
-          <label>Email address:</label>
-          <input
-            type="text"
-            name="email"
-            className={`${formErrors.email && "error"}`}
-            placeholder="Email address"
-            onChange={handleFormChange}
-            required
-          ></input>
-          {formErrors.email && (
-            <span className="error-message">{formErrors.email}</span>
-          )}
-        </div>
+      <input
+        type="text"
+        name="firstName"
+        className={`first-name-input ${formErrors.firstName && "error"}`}
+        placeholder="First name"
+        onChange={handleFormChange}
+        required
+      ></input>
 
-        <div>
-          <label>Phone #:</label>
-          <input
-            type="text"
-            name="phone"
-            className={`${formErrors.phone && "error"}`}
-            placeholder="Phone #"
-            onChange={handleFormChange}
-            required
-          ></input>
-          {formErrors.phone && (
-            <span className="error-message">{formErrors.phone}</span>
-          )}
-        </div>
-        <div className="btn-right">
-          <button onClick={handleNext}>Next</button>
-        </div>
-      </form>
-    </div>
+      {formErrors.firstName && (
+        <span className="first-name-error error-message">
+          {formErrors.firstName}
+        </span>
+      )}
+
+      <label className="last-name-label">Last name:</label>
+
+      <input
+        type="text"
+        name="lastName"
+        className={`last-name-input ${formErrors.lastName && "error"}`}
+        placeholder="Last name"
+        onChange={handleFormChange}
+        required
+      ></input>
+
+      {formErrors.lastName && (
+        <span className="last-name-error error-message">
+          {formErrors.lastName}
+        </span>
+      )}
+
+      <label className="email-label">Email address:</label>
+
+      <input
+        type="text"
+        name="email"
+        className={`email-input ${formErrors.email && "error"}`}
+        placeholder="Email address"
+        onChange={handleFormChange}
+        required
+      ></input>
+
+      {formErrors.email && (
+        <span className="email-error error-message">{formErrors.email}</span>
+      )}
+
+      <label className="phone-label">Phone #:</label>
+
+      <input
+        type="text"
+        name="phone"
+        className={`phone-input ${formErrors.phone && "error"}`}
+        placeholder="Phone #"
+        onChange={handleFormChange}
+        required
+      ></input>
+
+      {formErrors.phone && (
+        <span className="phone-error error-message">{formErrors.phone}</span>
+      )}
+
+      <div className="btn-right">
+        <button onClick={handleNext}>Next</button>
+      </div>
+    </form>
   );
 };
 

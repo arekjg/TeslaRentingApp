@@ -15,8 +15,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/user" element={<User />} />
-          <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/summary" element={<Summary />} />
+          <Route path="/reservation" element={<Confirmation />} />
         </Route>
       </Routes>
     </BrowserRouter>

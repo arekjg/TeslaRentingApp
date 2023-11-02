@@ -23,7 +23,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occured: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
             }
         }
 
@@ -45,7 +45,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"An error occured: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
             }
         }
 

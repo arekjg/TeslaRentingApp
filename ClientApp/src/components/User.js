@@ -69,6 +69,11 @@ const User = () => {
       updatedFormErrors.phone = "You must enter your phone number";
       isValid = false;
     }
+    if (form.phone.match(/^[0-9]+$/) === null) {
+      console.log("asd");
+      updatedFormErrors.phone = "You must enter only numbers";
+      isValid = false;
+    }
 
     setFormErrors(updatedFormErrors);
     return isValid;

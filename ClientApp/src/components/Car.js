@@ -33,9 +33,7 @@ const Car = ({
         <img src={`../images/${imageName}`} alt={name} />
       </div>
       <div className="car-details">
-        <p>
-          <span className="text-model-name">{name}</span>
-        </p>
+        <h5>{name}</h5>
         <p className="text-details">
           <span title="Number of seats">
             <SeatIcon />

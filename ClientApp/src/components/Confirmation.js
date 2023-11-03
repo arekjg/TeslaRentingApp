@@ -33,14 +33,20 @@ const Confirmation = () => {
 
   return (
     <div className="reservation-container">
-        <h3>Thank you for your reservation!</h3>
+      <h3>Thank you for your reservation!</h3>
       <div>
-        <p>Copy the code below to review your reservation later.</p>
-        <p><strong>{reservation.data.uuid}</strong></p>
+        <p>Your unique identification number:</p>
+        <p>
+          {reservation.errorMessage && (
+            <div className="error-message">
+              Error: {reservation.errorMessage}{" "}
+            </div>
+          )}
+          <strong>{reservation.data.uuid}</strong>
+        </p>
       </div>
 
       <div className="btn-right">
-        <button id="delete">Delete</button>
         <button onClick={() => navigate("/")}>Home</button>
       </div>
     </div>

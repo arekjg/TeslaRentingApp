@@ -101,9 +101,7 @@ const Summary = () => {
 
     const reservationResponseObject = await postReservation(reservationData);
 
-    navigate(
-      `/reservation?uuid=${reservationResponseObject.data.uuid}`
-    );
+    navigate(`/reservation?uuid=${reservationResponseObject.data.uuid}`);
   };
 
   const generateUUID = () => {
@@ -120,6 +118,9 @@ const Summary = () => {
       <h3>Reservation summary</h3>
 
       <div className="car-summary">
+        {model.errorMessage && (
+          <div className="error-message">Error: {model.errorMessage} </div>
+        )}
         <h4>{model.data.name}</h4>
         <div className="car-image">
           <img
@@ -161,12 +162,28 @@ const Summary = () => {
 
       <div className="reservation-summary">
         <p>
-          Pick up: <strong>{pickUpDateString}</strong> in{" "}
+          Pick up: <strong>{pickUpDateString.replaceAll("-", "/")}</strong> in{" "}
           <strong>{startLocation.data.name}</strong>
+          {startLocation.errorMessage && (
+            <div className="error-message">
+              Error: {startLocation.errorMessage}{" "}
+            </div>
+          )}
         </p>
         <p>
-          Return: <strong>{returnDateString}</strong> in{" "}
+          Return: <strong>{returnDateString.replaceAll("-", "/")}</strong> in{" "}
           <strong>{endLocation.data.name}</strong>
+          {endLocation.errorMessage && (
+            <div className="error-message">
+              Error: {endLocation.errorMessage}{" "}
+            </div>
+          )}
+        </p>
+      </div>
+
+      <div className="cost-summary">
+        <p>
+          Total cost: <strong>{reservationData.cost} &euro;</strong>
         </p>
       </div>
 

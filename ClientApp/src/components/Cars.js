@@ -21,10 +21,15 @@ const Cars = () => {
     fetchData();
   }, []);
 
-  const rednerCars = () => {
-    return (
-      <div className="cars-list">
-        {models.data.sort((a, b) => a.pricePerDay - b.pricePerDay).map((model) => (
+  return (
+    <div className="cars-list">
+      {models.errorMessage && (
+        <div className="error-message">Error: {models.errorMessage} </div>
+      )}
+
+      {models.data
+        .sort((a, b) => a.pricePerDay - b.pricePerDay)
+        .map((model) => (
           <Car
             key={model.id}
             id={model.id}
@@ -40,15 +45,7 @@ const Cars = () => {
             returnLocation={returnLocation}
           />
         ))}
-      </div>
-    );
-  };
-
-  return (
-    <>
-      {models.errorMessage && <div>Error: {models.errorMessage} </div>}
-      {models && rednerCars()}
-    </>
+    </div>
   );
 };
 

@@ -29,34 +29,46 @@ h3 {
 }
 
 .nav-bar::after {
-  content: "";
-  display: table;
-  clear: both;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-areas: "left center";
+}
+
+.head-left {
+  grid-area: left;
+  width: 20%;
+}
+.head-center {
+  grid-area: center;
+  width: 60%;
 }
 
 .column {
   float: left;
 }
 
-.left,
-.right {
-  width: 20%;
-}
-
-.middle {
-  width: 60%;
-}
-
-.left img {
+.head-left img {
   width: 70px;
   margin: 30px;
 }
 
-.middle img {
+.head-center img {
   margin: auto;
   display: block;
   margin-top: 50px;
   width: 200px;
+}
+
+@media (max-width: 650px) {
+  .nav-bar::after {
+    grid-template-columns: 1fr;
+  }
+  .head-left {
+    display: none;
+  }
+  .head-center {
+    width: 100%;
+  }
 }
 /*#endregion*/
 
@@ -69,14 +81,18 @@ h3 {
 
 .search-form-container,
 .cars-list,
-.summary-container {
-  width: 80%;
-  margin: auto;
+.summary-container,
+.reservation-container,
+.user-container,
+.reservation-container {
   background-color: #cfc8bb;
+  margin: auto;
   margin-top: 60px;
   border-radius: 10px;
   padding: 30px;
+  width: 80%;
   max-width: 800px;
+  margin-bottom: 60px;
 }
 
 /*#region HomeComponent*/
@@ -87,48 +103,78 @@ h3 {
   grid-row-gap: 5px;
   text-align: center;
   align-items: center;
+  min-width: 280px;
+  grid-template-areas:
+    "header header"
+    "loc-h-p loc-h-r"
+    "loc-p-p loc-p-r"
+    "loc-e-p loc-e-r"
+    "date-h-p date-h-r"
+    "date-p-p date-p-r"
+    ". btn";
 }
 
 .search-form-container h3 {
-  grid-area: 1 / 1 / 2 / 3;
+  grid-area: header;
 }
 .location-header#pickUp {
-  grid-area: 2 / 1 / 3 / 2;
+  grid-area: loc-h-p;
 }
 .location-header#return {
-  grid-area: 2 / 2 / 3 / 3;
+  grid-area: loc-h-r;
 }
 .location-picker#pickUp {
-  grid-area: 3 / 1 / 4 / 2;
+  grid-area: loc-p-p;
 }
 .location-picker#return {
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: loc-p-r;
 }
 .location-error#pickUp {
-  grid-area: 4 / 1 / 5 / 2;
+  grid-area: loc-e-p;
 }
 .location-error#return {
-  grid-area: 4 / 2 / 5 / 3;
+  grid-area: loc-e-r;
 }
 .date-header#pickUp {
-  grid-area: 5 / 1 / 6 / 2;
+  grid-area: date-h-p;
 }
 .date-header#return {
-  grid-area: 5 / 2 / 6 / 3;
+  grid-area: date-h-r;
 }
 .date-picker#pickUp {
-  grid-area: 6 / 1 / 7 / 2;
+  grid-area: date-p-p;
 }
 .date-picker#return {
-  grid-area: 6 / 2 / 7 / 3;
+  grid-area: date-p-r;
 }
 .search-form-container .btn-right {
-  grid-area: 7 / 2 / 8 / 3;
+  grid-area: btn;
 }
 
 .search-header {
   font-weight: bold;
   font-size: 16px;
+}
+
+@media (max-width: 650px) {
+  .search-form-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(11, 0.2fr);
+    grid-row-gap: 0;
+    grid-template-areas:
+      "header"
+      "loc-h-p"
+      "loc-p-p"
+      "loc-e-p"
+      "loc-h-r"
+      "loc-p-r"
+      "loc-e-r"
+      "date-h-p"
+      "date-p-p"
+      "date-h-r"
+      "date-p-r"
+      "btn";
+  }
 }
 /*#endregion*/
 
@@ -144,12 +190,17 @@ input {
 }
 
 /*#region Cars*/
+.cars-list {
+  min-width: 330px;
+}
+
 .car-container {
   display: grid;
-  grid-template-columns: 0.7fr 1fr 0.71fr;
+  grid-template-columns: 0.7fr 1fr 0.7fr;
   column-gap: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #928a7f;
+  grid-template-areas: "car det cost";
 }
 
 .car-container:last-child {
@@ -158,35 +209,26 @@ input {
 }
 
 .car-image {
-  grid-column: 1;
-  height: 150px;
+  grid-area: car;
 }
 
 .car-details {
-  grid-column: 2;
+  grid-area: det;
 }
 
 .car-price {
-  grid-column: 3;
+  grid-area: cost;
   text-align: right;
 }
 
 .car-image img {
-  max-height: 100%;
   max-width: 100%;
 }
-/*#endregion*/
 
-/*#region CarDetails*/
 .text-price-1 {
   font-weight: bold;
   font-size: 20px;
   color: #4b4237;
-}
-
-.text-model-name {
-  font-weight: bold;
-  font-size: 22px;
 }
 
 .details-icon {
@@ -198,19 +240,41 @@ input {
   margin-top: 15px;
   font-size: 14px;
 }
-/*#endregion*/
 
-.reservation-container,
-.user-container {
-  background-color: #cfc8bb;
-  margin: auto;
-  margin-top: 60px;
-  margin-bottom: 20px;
-  padding: 30px;
-  width: 80%;
-  border-radius: 10px;
-  max-width: 800px;
+.car-container button {
+  margin-bottom: 15px;
 }
+
+@media (max-width: 650px) {
+  .car-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr 0.3fr;
+    grid-template-areas:
+      "det"
+      "car"
+      "cost";
+  }
+  .car-container .car-image {
+    width: 70%;
+    height: 90%;
+    margin-top: 20px;
+  }
+  .car-container p {
+    margin: 0;
+    font-size: 12px;
+  }
+  .text-price-1,
+  .car-container span {
+    font-size: 12px;
+  }
+  .car-container button {
+    font-size: 12px;
+    width: 80px;
+    height: 25px;
+    padding: 0;
+  }
+}
+/*#endregion*/
 
 /*#region User*/
 .user-container {
@@ -218,84 +282,163 @@ input {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr repeat(6, 0.2fr) 1fr;
   grid-row-gap: 5px;
+  min-width: 300px;
   text-align: center;
   align-items: center;
+  grid-template-areas:
+    "header header"
+    "first-lab last-lab"
+    "first-in last-in"
+    "first-err last-err"
+    "email-lab phone-lab"
+    "email-in phone-in"
+    "email-err phone-err"
+    ". btn";
 }
 
 .user-container h3 {
-  grid-area: 1 / 1 / 2 / 3;
+  grid-area: header;
 }
 .first-name-label {
-  grid-area: 2 / 1 / 3 / 2;
+  grid-area: first-lab;
 }
 .last-name-label {
-  grid-area: 2 / 2 / 3 / 3;
+  grid-area: last-lab;
 }
 .first-name-input {
-  grid-area: 3 / 1 / 4 / 2;
+  grid-area: first-in;
 }
 .last-name-input {
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: last-in;
 }
 .first-name-error {
-  grid-area: 4 / 1 / 5 / 2;
+  grid-area: first-err;
 }
 .last-name-error {
-  grid-area: 4 / 2 / 5 / 3;
+  grid-area: last-err;
 }
 .email-label {
-  grid-area: 5 / 1 / 6 / 2;
+  grid-area: email-lab;
 }
 .phone-label {
-  grid-area: 5 / 2 / 6 / 3;
+  grid-area: phone-lab;
 }
 .email-input {
-  grid-area: 6 / 1 / 7 / 2;
+  grid-area: email-in;
 }
 .phone-input {
-  grid-area: 6 / 2 / 7 / 3;
+  grid-area: phone-in;
 }
 .email-error {
-  grid-area: 7 / 1 / 8 / 2;
+  grid-area: email-err;
 }
 .phone-error {
-  grid-area: 7 / 2 / 8 / 3;
+  grid-area: phone-err;
 }
 .user-container .btn-right {
-  grid-area: 8 / 2 / 9 / 3;
+  grid-area: btn;
+}
+
+@media (max-width: 650px) {
+  .user-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(13, 0.2fr);
+    grid-row-gap: 0;
+    grid-template-areas:
+      "header"
+      "first-lab"
+      "first-in"
+      "first-err"
+      "last-lab"
+      "last-in"
+      "last-err"
+      "email-lab"
+      "email-in"
+      "email-err"
+      "phone-lab"
+      "phone-in"
+      "phone-err"
+      "btn";
+  }
 }
 
 /*#endregion*/
 
 /*#region Summary*/
 .summary-container {
+  min-width: 300px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 0.5fr repeat(2, 0.6fr) 0.2fr;
+  grid-template-rows: 0.5fr repeat(4, 0.1fr);
   grid-column-gap: 50px;
-  grid-row-gap: 20px;
+  grid-row-gap: 25px;
+  grid-template-areas:
+    "header header"
+    "car user"
+    "car res"
+    "car cost"
+    ". btn";
 }
 
 .summary-container h3 {
-  grid-area: 1 / 1 / 2 / 3;
+  grid-area: header;
 }
 .car-summary {
-  grid-area: 2 / 1 / 4 / 2;
+  grid-area: car;
   text-align: center;
+  margin-top: 25px;
 }
 .user-summary {
-  grid-area: 2 / 2 / 3 / 3;
+  grid-area: user;
 }
 .reservation-summary {
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: res;
+}
+.cost-summary {
+  grid-area: cost;
 }
 .summary-container .btn-right {
-  grid-area: 4 / 2 / 5 / 3;
+  grid-area: btn;
+}
+
+@media (max-width: 650px) {
+  .summary-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 0.2fr);
+    grid-row-gap: 0;
+    grid-template-areas:
+      "header"
+      "user"
+      "res"
+      "cost"
+      "car"
+      "btn";
+  }
+  .summary-container .car-image {
+    margin: auto;
+    width: 80%;
+    height: 70%;
+  }
+  .summary-container p {
+    margin: 0;
+  }
+  .summary-container .btn-right,
+  .reservation-container .btn-right {
+    text-align: center;
+  }
+  .summary-container button,
+  .reservation-container button {
+    font-size: 14px;
+    height: 30px;
+    width: 100px;
+    padding: 0;
+  }
 }
 /*#endregion*/
 
 .reservation-container {
   text-align: center;
+  min-width: 250px;
 }
 
 .error-message {
@@ -339,19 +482,6 @@ button:active {
 .btn-right {
   text-align: right;
   margin-top: 30px;
-}
-
-#delete {
-  background-color: #780f0f;
-  color:#d1d1d1;
-}
-
-#delete:hover {
-  background-color: #b14b07;
-}
-
-#delete:active {
-  background-color: #ce1d02;
 }
 /*#endregion*/
 

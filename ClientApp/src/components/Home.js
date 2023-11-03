@@ -80,6 +80,10 @@ const Home = () => {
     <form className="search-form-container">
       <h3>Looking for an electric car? You're in the right place!</h3>
 
+      {locations.errorMessage && (
+        <div className="error-message">Error: {locations.errorMessage}</div>
+      )}
+
       <label className="search-header location-header" id="pickUp">
         Pick up location
       </label>

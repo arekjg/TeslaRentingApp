@@ -47,8 +47,8 @@ export const getLocations = () => {
 };
 
 export const getLocation = (id) => {
-  return fetcherGet(`api/locations/${id}`)
-}
+  return fetcherGet(`api/locations/${id}`);
+};
 
 export const getModels = () => {
   return fetcherGet("api/models");

@@ -69,18 +69,8 @@ export const CapacityIcon = () => (
       strokeWidth="2"
       strokeLinejoin="round"
     />
-    <path
-      d="M7 16H17"
-      stroke="#000000"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M7 10H17"
-      stroke="#000000"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
+    <path d="M7 16H17" stroke="#000000" strokeWidth="2" strokeLinecap="round" />
+    <path d="M7 10H17" stroke="#000000" strokeWidth="2" strokeLinecap="round" />
     <path
       d="M8 20V21"
       stroke="#000000"

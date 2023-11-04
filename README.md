@@ -83,4 +83,4 @@ TeslaRentingDB consists of 4 tables:
 * dbo.Reservations - stores reservations details like pick up and return dates and locations, related model and user, overall renting cost
 
 Database diagram:
-![DB Diagram](./img/db-diagram.PNG)
+![DB Diagram](./img/db-diagram.png)

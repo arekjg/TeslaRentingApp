@@ -18,7 +18,7 @@ namespace TeslaRentingApp
         public int LocIdStart { get; set; }
         [Column("Res_LocIdEnd")]
         public int LocIdEnd { get; set; }
-        [Column("Res_Cost")]
+        [Column("Res_Cost", TypeName = "money")]
         public decimal Cost { get; set; }
         [Column("Res_Uuid")]
         public string Uuid { get; set; }

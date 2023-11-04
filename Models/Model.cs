@@ -8,7 +8,7 @@ namespace TeslaRentingApp
         public int Id { get; set; }
         [Column("Mod_Name")]
         public string Name { get; set; }
-        [Column("Mod_PricePerDay")]
+        [Column("Mod_PricePerDay", TypeName = "money")]
         public decimal PricePerDay { get; set; }
         [Column("Mod_Image")]
         public string ImageName { get; set; }

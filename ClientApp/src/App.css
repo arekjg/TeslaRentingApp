@@ -396,6 +396,7 @@ input {
 }
 .cost-summary {
   grid-area: cost;
+  font-size: 18px;
 }
 .summary-container .btn-right {
   grid-area: btn;

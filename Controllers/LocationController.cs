@@ -33,7 +33,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                Location location = await _locationRepository.GetLocation(id);
+                Location? location = await _locationRepository.GetLocation(id);
 
                 if (location != null)
                 {

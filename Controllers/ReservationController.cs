@@ -31,7 +31,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                Reservation reservation = await _reservationRepository.GetReservation(uuid);
+                Reservation? reservation = await _reservationRepository.GetReservation(uuid);
 
                 if (reservation != null)
                 {
@@ -66,7 +66,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                Reservation reservation = await _reservationRepository.GetReservation(uuid);
+                Reservation? reservation = await _reservationRepository.GetReservation(uuid);
 
                 if (reservation != null)
                 {

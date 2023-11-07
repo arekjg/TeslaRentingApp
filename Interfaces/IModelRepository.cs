@@ -3,6 +3,6 @@
     public interface IModelRepository
     {
         Task<List<Model>> GetModels();
-        Task<Model> GetModel(int id);
+        Task<Model?> GetModel(int id);
     }
 }

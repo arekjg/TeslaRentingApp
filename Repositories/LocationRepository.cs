@@ -11,7 +11,7 @@ namespace TeslaRentingApp
             _context = context;
         }
 
-        public async Task<Location> GetLocation(int id)
+        public async Task<Location?> GetLocation(int id)
         {
             return await _context.Locations.FirstOrDefaultAsync(l => l.Id == id);
         }

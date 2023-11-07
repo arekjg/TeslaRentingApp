@@ -17,7 +17,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                User user = await _userRepository.GetUser(id);
+                User? user = await _userRepository.GetUser(id);
 
                 if (user != null)
                 {

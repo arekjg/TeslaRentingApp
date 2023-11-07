@@ -11,7 +11,7 @@ namespace TeslaRentingApp
             _context = context;
         }
 
-        public async Task<Reservation> CreateReservation(Reservation reservation)
+        public async Task<Reservation?> CreateReservation(Reservation reservation)
         {
             await _context.Reservations.AddAsync(reservation);
             await _context.SaveChangesAsync();
@@ -21,7 +21,7 @@ namespace TeslaRentingApp
 
         public async Task<List<Reservation>> DeleteReservation(string uuid)
         {
-            Reservation reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Uuid == uuid);
+            Reservation? reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Uuid == uuid);
             
             if (reservation != null)
             {
@@ -32,7 +32,7 @@ namespace TeslaRentingApp
             return await _context.Reservations.ToListAsync();
         }
 
-        public async Task<Reservation> GetReservation(string uuid)
+        public async Task<Reservation?> GetReservation(string uuid)
         {
             return await _context.Reservations.FirstOrDefaultAsync(r => r.Uuid == uuid);
         }

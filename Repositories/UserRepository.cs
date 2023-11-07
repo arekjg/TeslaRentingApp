@@ -11,7 +11,7 @@ namespace TeslaRentingApp
             _context = context;
         }
 
-        public async Task<User> CreateUser(User user)
+        public async Task<User?> CreateUser(User user)
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -19,7 +19,7 @@ namespace TeslaRentingApp
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User?> GetUser(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }

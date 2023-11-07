@@ -32,7 +32,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                Model model = await _modelRepository.GetModel(id);
+                Model? model = await _modelRepository.GetModel(id);
 
                 if (model != null)
                 {

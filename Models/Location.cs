@@ -7,6 +7,6 @@ namespace TeslaRentingApp
         [Column("Loc_Id")]
         public int Id { get; set; }
         [Column("Loc_Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace TeslaRentingApp
             _context = context;
         }
 
-        public async Task<Model> GetModel(int id)
+        public async Task<Model?> GetModel(int id)
         {
             return await _context.Models.FirstOrDefaultAsync(m => m.Id == id);
         }

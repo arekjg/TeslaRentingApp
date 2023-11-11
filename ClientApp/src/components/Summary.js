@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { baseURL, getLocation, getModel, postReservation } from "../fetcher";
+import { getLocation, getModel, postReservation, postUser } from "../fetcher";
 import { SeatIcon, RangeIcon, CapacityIcon } from "./Icons";
 
 const Summary = () => {
@@ -86,13 +86,7 @@ const Summary = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
 
-    const userResponseObject = await fetch(baseURL + "api/users", {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((resp) => resp.json());
+    const userResponseObject = await postUser(userData);
 
     reservationData.userId = userResponseObject.id;
 

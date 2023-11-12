@@ -22,7 +22,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 
@@ -32,19 +32,11 @@ namespace TeslaRentingApp
             try
             {
                 Reservation? reservation = await _reservationRepository.GetReservation(id);
-
-                if (reservation != null)
-                {
-                    return Ok(reservation);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return ResponseUtility.OkOrNotFound(reservation);
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 
@@ -57,7 +49,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 
@@ -67,19 +59,11 @@ namespace TeslaRentingApp
             try
             {
                 Reservation? reservation = await _reservationRepository.GetReservation(id);
-
-                if (reservation != null)
-                {
-                    return Ok(await _reservationRepository.DeleteReservation(id));
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return ResponseUtility.OkOrNotFound(reservation);
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
     }

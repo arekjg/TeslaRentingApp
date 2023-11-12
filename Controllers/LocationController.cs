@@ -24,7 +24,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 
@@ -34,19 +34,11 @@ namespace TeslaRentingApp
             try
             {
                 Location? location = await _locationRepository.GetLocation(id);
-
-                if (location != null)
-                {
-                    return Ok(location);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return ResponseUtility.OkOrNotFound(location);
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
     }

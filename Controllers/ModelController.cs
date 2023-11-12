@@ -23,7 +23,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 
@@ -33,19 +33,11 @@ namespace TeslaRentingApp
             try
             {
                 Model? model = await _modelRepository.GetModel(id);
-
-                if (model != null)
-                {
-                    return Ok(model);                
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return ResponseUtility.OkOrNotFound(model);
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 

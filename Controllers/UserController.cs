@@ -18,19 +18,11 @@ namespace TeslaRentingApp
             try
             {
                 User? user = await _userRepository.GetUser(id);
-
-                if (user != null)
-                {
-                    return Ok(user);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return ResponseUtility.OkOrNotFound(user);
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
 
@@ -43,7 +35,7 @@ namespace TeslaRentingApp
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occured: {e.Message}");
+                return ResponseUtility.InternalServerError(e);
             }
         }
     }

@@ -87,7 +87,6 @@ const Summary = () => {
 
     const userResponseObject = await postUser(userData);
     reservationData.userId = userResponseObject.id;
-    // const reservationResponseObject = await postReservation(reservationData);
     await postReservation(reservationData);
 
     navigate("/reservation");

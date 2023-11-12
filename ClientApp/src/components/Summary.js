@@ -50,8 +50,7 @@ const Summary = () => {
     dateEnd: returnDate,
     locIdStart: pickUpLocation,
     locIdEnd: returnLocation,
-    cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2)),
-    uuid: "",
+    cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2))
   };
 
   const userData = {
@@ -87,24 +86,11 @@ const Summary = () => {
     e.preventDefault();
 
     const userResponseObject = await postUser(userData);
-
     reservationData.userId = userResponseObject.id;
+    // const reservationResponseObject = await postReservation(reservationData);
+    await postReservation(reservationData);
 
-    const uuid = generateUUID();
-    reservationData.uuid = uuid;
-
-    const reservationResponseObject = await postReservation(reservationData);
-
-    navigate(`/reservation?uuid=${reservationResponseObject.data.uuid}`);
-  };
-
-  const generateUUID = () => {
-    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
-      (
-        c ^
-        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-      ).toString(16)
-    );
+    navigate("/reservation");
   };
 
   return (

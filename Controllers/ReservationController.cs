@@ -26,12 +26,12 @@ namespace TeslaRentingApp
             }
         }
 
-        [HttpGet("{uuid}")]
-        public async Task<IActionResult> GetReservationByUuid(string uuid)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetReservationByUuid(int id)
         {
             try
             {
-                Reservation? reservation = await _reservationRepository.GetReservation(uuid);
+                Reservation? reservation = await _reservationRepository.GetReservation(id);
 
                 if (reservation != null)
                 {
@@ -61,16 +61,16 @@ namespace TeslaRentingApp
             }
         }
 
-        [HttpDelete("{uuid}")]
-        public async Task<IActionResult> DeleteReservation(string uuid)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReservation(int id)
         {
             try
             {
-                Reservation? reservation = await _reservationRepository.GetReservation(uuid);
+                Reservation? reservation = await _reservationRepository.GetReservation(id);
 
                 if (reservation != null)
                 {
-                    return Ok(await _reservationRepository.DeleteReservation(uuid));
+                    return Ok(await _reservationRepository.DeleteReservation(id));
                 }
                 else
                 {

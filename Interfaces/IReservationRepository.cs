@@ -3,8 +3,8 @@
     public interface IReservationRepository
     {
         Task<List<Reservation>> GetReservations();
-        Task<Reservation?> GetReservation(string uuid);
+        Task<Reservation?> GetReservation(int id);
         Task<Reservation?> CreateReservation(Reservation reservation);
-        Task<List<Reservation>> DeleteReservation(string uuid);
+        Task<List<Reservation>> DeleteReservation(int id);
     }
 }

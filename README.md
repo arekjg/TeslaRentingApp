@@ -1,4 +1,4 @@
-# Tesla Renting App
+ # Tesla Renting App
 > Simple car renting web application.
 
 ## Table of Contents
@@ -10,7 +10,7 @@
 
 
 ## General information
-This is a car renting web application that simplifies the process of reserbing a Tesla car. With this app, users can choose their pick-up and return dates, pick-up and return locations (which can be the same or different) and browse from a range of 10 Tesla car models.
+This is a car renting web application that simplifies the process of reserving a Tesla car. With this app, users can choose their pick-up and return dates, pick-up and return locations (which can be the same or different) and browse from a range of 10 Tesla car models.
 
 Available locations:
 * Palma Airport

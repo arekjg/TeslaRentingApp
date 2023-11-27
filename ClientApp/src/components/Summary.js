@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getLocation, getModel, postReservation, postUser } from "../fetcher";
-import { SeatIcon, RangeIcon, CapacityIcon } from "./Icons";
 
 const Summary = () => {
   const [startLocation, setStartLocation] = useState({
@@ -50,7 +49,7 @@ const Summary = () => {
     dateEnd: returnDate,
     locIdStart: pickUpLocation,
     locIdEnd: returnLocation,
-    cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2))
+    cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2)),
   };
 
   const userData = {
@@ -110,16 +109,25 @@ const Summary = () => {
 
         <p className="text-details">
           <span title="Number of seats">
-            <SeatIcon />
+            <img src="../images/SeatIcon.svg" className="details-icon svg-icon" alt="" />
             {model.data.seats}
           </span>
           &emsp;
           <span title="Cargo Capacity">
-            <CapacityIcon />
+            <img
+              src="../images/CapacityIcon.svg"
+              className="details-icon svg-icon"
+              alt=""
+            />{" "}
             {model.data.capacity} cu ft&emsp;
           </span>
           <span title="Range">
-            <RangeIcon /> {model.data.range} mi
+            <img
+              src="../images/RangeIcon.svg"
+              className="details-icon svg-icon"
+              alt=""
+            />{" "}
+            {model.data.range} mi
           </span>
         </p>
       </div>

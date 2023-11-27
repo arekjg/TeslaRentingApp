@@ -1,3 +1,12 @@
+:root {
+  --color-main: #0A0908;
+  --color-theme1: #22223B;
+  --color-theme2: #4A4E69;
+  --color-theme3: #383838;
+  --text-dark: #000;
+  --text-light: #d8d8d8;
+}
+
 body,
 html {
   margin: 0;
@@ -6,6 +15,7 @@ html {
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
     Arial, sans-serif;
   font-size: 16px;
+  color: var(--text-light);
 }
 
 #root {
@@ -19,12 +29,15 @@ h3 {
   margin-bottom: 30px;
 }
 
+.svg-icon {
+  filter: invert(77%) sepia(0%) saturate(652%) hue-rotate(219deg) brightness(104%) contrast(118%);
+}
+
 /*#region Header*/
 .header {
   width: 100%;
   height: 150px;
-  background-color: #4b4247;
-  color: black;
+  background-color: var(--color-main);
   text-decoration: none;
 }
 
@@ -73,7 +86,7 @@ h3 {
 /*#endregion*/
 
 .content {
-  background-image: linear-gradient(#4b4247, #736b60);
+  background-color: var(--color-main);
   display: table-row;
   height: 100%;
   width: 100%;
@@ -85,7 +98,7 @@ h3 {
 .reservation-container,
 .user-container,
 .reservation-container {
-  background-color: #cfc8bb;
+  background-color: var(--color-theme3);
   margin: auto;
   margin-top: 60px;
   border-radius: 10px;
@@ -199,7 +212,7 @@ input {
   grid-template-columns: 0.7fr 1fr 0.7fr;
   column-gap: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid #928a7f;
+  border-bottom: 1px solid var(--color-theme3);
   grid-template-areas: "car det cost";
 }
 
@@ -228,7 +241,6 @@ input {
 .text-price-1 {
   font-weight: bold;
   font-size: 20px;
-  color: #4b4237;
 }
 
 .details-icon {
@@ -455,12 +467,12 @@ input {
 /*#region Buttons*/
 button {
   background-clip: padding-box;
-  background-color: #d5a021;
-  border: 1px solid transparent;
+  background-color: var(--color-theme2);
+  color: var(--text-light);
+  border: 1px solid var(--text-light);
   border-radius: 6px;
   box-shadow: #00000005 0 1px 3px 0;
   box-sizing: border-box;
-  color: #000;
   cursor: pointer;
   font-weight: 500;
   justify-content: center;
@@ -473,11 +485,13 @@ button {
 }
 
 button:hover {
-  background-color: #90712c;
+  background-color: var(--color-theme1);
+  color: var(--text-light);
 }
 
 button:active {
-  background-color: #4b4237;
+  background-color: var(--color-theme2);
+  color: var(--text-light);
 }
 
 .btn-right {
@@ -485,6 +499,24 @@ button:active {
   margin-top: 30px;
 }
 /*#endregion*/
+
+/*#region Footer*/
+.footer {
+  background-color: var(--color-main);
+  text-align: center;
+}
+
+.footer-container {
+  padding: 20px;
+}
+
+#gh-ico {
+  height: 30px;
+  transform: translateY(-2px);
+}
+/*#endregion*/
+
+
 
 /* div {
   border: 1px red solid;

@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { SeatIcon, RangeIcon, CapacityIcon } from "./Icons";
 
 const Car = ({
   id,
@@ -36,16 +35,25 @@ const Car = ({
         <h5>{name}</h5>
         <p className="text-details">
           <span title="Number of seats">
-            <SeatIcon />
+            <img src="../images/SeatIcon.svg" className="details-icon svg-icon" alt="" />
             {seats}
           </span>
           &emsp;
           <span title="Cargo Capacity">
-            <CapacityIcon />
+            <img
+              src="../images/CapacityIcon.svg"
+              className="details-icon svg-icon"
+              alt=""
+            />{" "}
             {capacity} cu ft&emsp;
           </span>
           <span title="Range">
-            <RangeIcon /> {range} mi
+            <img
+              src="../images/RangeIcon.svg"
+              className="details-icon svg-icon"
+              alt=""
+            />{" "}
+            {range} mi
           </span>
         </p>
       </div>

@@ -12,24 +12,6 @@
 ## General information
 This is a car renting web application that simplifies the process of reserving a Tesla car. With this app, users can choose their pick-up and return dates, pick-up and return locations (which can be the same or different) and browse from a range of 10 Tesla car models.
 
-Available locations:
-* Palma Airport
-* Palma City
-* Alcudia
-* Manacor
-
-Available models:
-* Model 3 Long
-* Model 3 Performance
-* Model 3 Rear
-* Model S
-* Model S Plaid
-* Model X
-* Model X Plaid
-* Model Y Long
-* Model Y Performance
-* Model Y Rear
-
 
 ## Technologies used
 - ASP.NET
@@ -49,7 +31,8 @@ Available models:
 
 In order to run this app locally you will need:
 * Visual Studio
-* SQL Server with SQL Server Management Studio
+* .NET 6 or higher
+* SQL Server
 * Node.js
 
 
@@ -58,11 +41,7 @@ In order to run this app locally you will need:
 1. Clone the repository to your local machine\
 `git clone https://github.com/arekjg/TeslaRentingApp.git`
 
-2. Open SQL Server Management Studio and create a database called `TeslaRentingDB`
-
-3. In SSMS open file `setup.sql` from `sql-scripts` directory, then run the scripts. It will create necessary tables and fill them with data.
-
-4. Go to directory with the application and open `appsetting.json` file. In `ConnectionString > DefaultConnection` in place of `<<SERVER>>` enter name of the server on which TeslaRentingDB is running.
+2. Go to directory with the application and open `appsetting.json` file. In `ConnectionString > DefaultConnection` in place of `<<SERVER>>` enter name of your SQL Server.
 
 ```c
   "ConnectionStrings": {
@@ -70,7 +49,13 @@ In order to run this app locally you will need:
   },
 ```
 
-5. Open solution file (`TeslaRentingApp.sln`) in Visual Studio and hit F5. If you have Node.js, it will automatically install npm and all necessary node modules.\
+3. Open solution file (`TeslaRentingApp.sln`) in Visual Studio.
+
+4. In Package Manager Console run command `update-database`. It will create a database on your server along with all the necessary tables and data.
+
+5. In Visual Studio hit F5 (Start Debugging) or Ctrl + F5 (Start Without Debugging).
+
+If you have Node.js, it will automatically install npm and all necessary node modules.\
 The app will start at `https://localhost:7292/` and then redirect to `https://localhost:44401/`.
 
 

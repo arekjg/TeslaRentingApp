@@ -4,6 +4,7 @@ namespace TeslaRentingApp
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Usr_Id")]
         public int Id { get; set; }
         [Column("Usr_FirstName")]

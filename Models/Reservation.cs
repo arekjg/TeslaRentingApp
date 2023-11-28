@@ -4,6 +4,7 @@ namespace TeslaRentingApp
 {
     public class Reservation
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Res_Id")]
         public int Id { get; set; }
         [Column("Res_CarId")]

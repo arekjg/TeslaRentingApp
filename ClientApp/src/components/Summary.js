@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getLocation, getModel, postReservation, postUser } from "../fetcher";
+import { CapacityIcon, RangeIcon, SeatIcon } from "./Icons";
 
 const Summary = () => {
   const [startLocation, setStartLocation] = useState({
@@ -108,27 +109,10 @@ const Summary = () => {
         </div>
 
         <p className="text-details">
-          <span title="Number of seats">
-            <img src="../images/SeatIcon.svg" className="details-icon svg-icon" alt="" />
-            {model.data.seats}
-          </span>
+          <SeatIcon seats={model.data.seats} />
           &emsp;
-          <span title="Cargo Capacity">
-            <img
-              src="../images/CapacityIcon.svg"
-              className="details-icon svg-icon"
-              alt=""
-            />{" "}
-            {model.data.capacity} cu ft&emsp;
-          </span>
-          <span title="Range">
-            <img
-              src="../images/RangeIcon.svg"
-              className="details-icon svg-icon"
-              alt=""
-            />{" "}
-            {model.data.range} mi
-          </span>
+          <CapacityIcon capacity={model.data.capacity} />
+          <RangeIcon range={model.data.range} />
         </p>
       </div>
 

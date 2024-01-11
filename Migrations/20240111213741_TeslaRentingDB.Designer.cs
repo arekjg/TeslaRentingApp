@@ -11,7 +11,7 @@ using TeslaRentingApp;
 namespace TeslaRentingApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231127212121_TeslaRentingDB")]
+    [Migration("20240111213741_TeslaRentingDB")]
     partial class TeslaRentingDB
     {
         /// <inheritdoc />
@@ -61,6 +61,11 @@ namespace TeslaRentingApp.Migrations
                         {
                             Id = 4,
                             Name = "Manacor"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Colònia de Sant Jordi"
                         });
                 });
 

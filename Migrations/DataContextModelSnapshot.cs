@@ -58,6 +58,11 @@ namespace TeslaRentingApp.Migrations
                         {
                             Id = 4,
                             Name = "Manacor"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Colònia de Sant Jordi"
                         });
                 });
 

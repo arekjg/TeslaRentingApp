@@ -33,6 +33,11 @@ h3 {
   filter: invert(77%) sepia(0%) saturate(652%) hue-rotate(219deg) brightness(104%) contrast(118%);
 }
 
+a {
+  text-decoration: none;
+  color: var(--text-light);
+}
+
 /*#region Header*/
 .header {
   width: 100%;
@@ -447,12 +452,12 @@ input {
     padding: 0;
   }
 }
-/*#endregion*/
 
 .reservation-container {
   text-align: center;
   min-width: 250px;
 }
+/*#endregion*/
 
 .error-message {
   color: red;
@@ -508,14 +513,30 @@ button:active {
 
 .footer-container {
   padding: 20px;
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+  grid-template-areas: "l c r";
 }
 
-#gh-ico {
+#footer-center {
+  grid-area: c;
+}
+
+div#gh-icon {
+  grid-area: l;
+  text-align: left;
+}
+
+img#gh-icon {
   height: 30px;
-  transform: translateY(-2px);
 }
 /*#endregion*/
 
+/*#region Locations*/
+.locations {
+  text-align: center;
+}
+/*#endregion*/
 
 
 /* div {

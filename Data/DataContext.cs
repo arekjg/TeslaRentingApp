@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeslaRentingApp
 {
@@ -19,7 +18,8 @@ namespace TeslaRentingApp
                 new Location { Id = 1, Name = "Palma Airport" },
                 new Location { Id = 2, Name = "Palma City Center" },
                 new Location { Id = 3, Name = "Alcudia" },
-                new Location { Id = 4, Name = "Manacor" });
+                new Location { Id = 4, Name = "Manacor" },
+                new Location { Id = 5, Name = "Colònia de Sant Jordi" });
 
             modelBuilder.Entity<Model>()
                 .HasData(

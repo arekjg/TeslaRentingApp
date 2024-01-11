@@ -18,7 +18,7 @@ namespace TeslaRentingApp
 
         public async Task<List<Location>> GetLocations()
         {
-            return await _context.Locations.ToListAsync();
+            return await _context.Locations.OrderBy(l => l.Name).ToListAsync();
         }
     }
 }

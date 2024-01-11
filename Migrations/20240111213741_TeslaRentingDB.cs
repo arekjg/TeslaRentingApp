@@ -86,7 +86,8 @@ namespace TeslaRentingApp.Migrations
                     { 1, "Palma Airport" },
                     { 2, "Palma City Center" },
                     { 3, "Alcudia" },
-                    { 4, "Manacor" }
+                    { 4, "Manacor" },
+                    { 5, "Colònia de Sant Jordi" }
                 });
 
             migrationBuilder.InsertData(

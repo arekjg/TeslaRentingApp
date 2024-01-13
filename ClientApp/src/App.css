@@ -219,6 +219,7 @@ input {
   margin-bottom: 20px;
   border-bottom: 1px solid var(--color-theme3);
   grid-template-areas: "car det cost";
+  border-bottom: 1px solid var(--text-dark);
 }
 
 .car-container:last-child {
@@ -536,6 +537,18 @@ img#gh-icon {
 .locations {
   text-align: center;
 }
+
+.locations iframe {
+  width: 600px;
+  height: 460px;
+}
+
+@media (max-width: 650px) {
+  .locations iframe {
+    width: 95%;
+  }
+}
+
 /*#endregion*/
 
 

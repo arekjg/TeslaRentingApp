@@ -71,7 +71,10 @@ namespace TeslaRentingApp.Migrations
                     Usr_FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Usr_LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Usr_Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Usr_Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Usr_Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Usr_Login = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Usr_Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Usr_Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {

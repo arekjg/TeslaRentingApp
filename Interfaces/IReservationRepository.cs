@@ -6,5 +6,6 @@
         Task<Reservation?> GetReservation(int id);
         Task<Reservation?> CreateReservation(Reservation reservation);
         Task<List<Reservation>> DeleteReservation(int id);
+        Task<Reservation?> UpdateReservation(Reservation reservation);
     }
 }

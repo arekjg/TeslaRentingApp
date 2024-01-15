@@ -74,6 +74,6 @@ export const postReservation = (data) => {
   return fetcherPost("api/reservations", data);
 };
 
-export const postUser = (data) => {
-  return fetcherPost("api/users", data);
+export const postUnregisteredUser = (data) => {
+  return fetcherPost("api/users/u", data);
 };

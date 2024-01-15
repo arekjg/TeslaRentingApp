@@ -11,7 +11,7 @@ using TeslaRentingApp;
 namespace TeslaRentingApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240111213741_TeslaRentingDB")]
+    [Migration("20240115214701_TeslaRentingDB")]
     partial class TeslaRentingDB
     {
         /// <inheritdoc />
@@ -272,9 +272,21 @@ namespace TeslaRentingApp.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Usr_LastName");
 
+                    b.Property<string>("Login")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Usr_Login");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Usr_Password");
+
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Usr_Phone");
+
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("Usr_Salt");
 
                     b.HasKey("Id");
 

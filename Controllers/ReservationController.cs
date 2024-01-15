@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TeslaRentingApp.Helpers;
 
 namespace TeslaRentingApp
 {
@@ -46,6 +47,20 @@ namespace TeslaRentingApp
             try
             {
                 return Ok(await _reservationRepository.CreateReservation(reservation));
+            }
+            catch (Exception e)
+            {
+                return ResponseUtility.InternalServerError(e);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutReservation(Reservation updatedReservation)
+        {
+            try
+            {
+                Reservation? reservation = await _reservationRepository.UpdateReservation(updatedReservation);
+                return ResponseUtility.OkOrNotFound(reservation);
             }
             catch (Exception e)
             {

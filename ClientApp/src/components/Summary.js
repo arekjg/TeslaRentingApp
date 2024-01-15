@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getLocation, getModel, postReservation, postUser } from "../fetcher";
+import { getLocation, getModel, postReservation, postUnregisteredUser } from "../fetcher";
 import { CapacityIcon, RangeIcon, SeatIcon } from "./Icons";
 
 const Summary = () => {
@@ -85,8 +85,11 @@ const Summary = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
 
-    const userResponseObject = await postUser(userData);
-    reservationData.userId = userResponseObject.id;
+    const userResponseObject = await postUnregisteredUser(userData);
+    console.log(userResponseObject);
+    console.log(userResponseObject.data.id);
+    reservationData.userId = userResponseObject.data.id;
+    console.log(reservationData);
     await postReservation(reservationData);
 
     navigate("/reservation");

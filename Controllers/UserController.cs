@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TeslaRentingApp.DTOs;
+using TeslaRentingApp.Helpers;
 
 namespace TeslaRentingApp
 {
@@ -26,12 +28,25 @@ namespace TeslaRentingApp
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostUser(User user)
+        [HttpPost("u")]
+        public async Task<IActionResult> PostUnregisteredUser(AddUnregisteredUserDto userDto)
         {
             try
             {
-                return Ok(await _userRepository.CreateUser(user));
+                return Ok(await _userRepository.CreateUnregisteredUser(userDto));
+            }
+            catch (Exception e)
+            {
+                return ResponseUtility.InternalServerError(e);
+            }
+        }
+
+        [HttpPost("r")]
+        public async Task<IActionResult> PostRegisteredUser(AddRegisteredUserDto userDto)
+        {
+            try
+            {
+                return Ok(await _userRepository.CreateRegisteredUser(userDto));
             }
             catch (Exception e)
             {

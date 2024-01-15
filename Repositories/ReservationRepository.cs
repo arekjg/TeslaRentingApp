@@ -41,5 +41,24 @@ namespace TeslaRentingApp
         {
             return await _context.Reservations.ToListAsync();
         }
+
+        public async Task<Reservation?> UpdateReservation(Reservation updatedReservation)
+        {
+            var reservation = _context.Reservations.FirstOrDefault(r => r.Id == updatedReservation.Id);
+
+            if (reservation != null)
+            {
+                reservation.CarId = updatedReservation.CarId;
+                reservation.DateStart = updatedReservation.DateStart;
+                reservation.DateEnd = updatedReservation.DateEnd;
+                reservation.LocIdStart = updatedReservation.LocIdStart;
+                reservation.LocIdEnd = updatedReservation.LocIdEnd;
+                reservation.Cost = updatedReservation.Cost;
+
+                _context.Reservations.Update(reservation);
+                await _context.SaveChangesAsync();
+            }
+            return reservation;
+        }
     }
 }

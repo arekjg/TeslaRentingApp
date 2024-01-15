@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TeslaRentingApp.DTOs;
+using TeslaRentingApp.Helpers;
 
 namespace TeslaRentingApp
 {
@@ -11,17 +13,47 @@ namespace TeslaRentingApp
             _context = context;
         }
 
-        public async Task<User?> CreateUser(User user)
+        public async Task<User?> GetUser(int id)
         {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<User?> CreateRegisteredUser(AddRegisteredUserDto userDto)
+        {
+            byte[] salt = Security.CreateSalt();
+            string hashedPassword = Security.HashThePassword(userDto.Password, salt);
+
+            User user = new User()
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                Phone = userDto.Phone,
+                Login = userDto.Login,
+                Password = hashedPassword,
+                Salt = salt
+            };
+
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
         }
 
-        public async Task<User?> GetUser(int id)
+        public async Task<User?> CreateUnregisteredUser(AddUnregisteredUserDto userDto)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            User user = new User()
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                Phone = userDto.Phone
+            };
+
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
         }
     }
 }

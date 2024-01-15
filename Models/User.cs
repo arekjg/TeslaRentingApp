@@ -15,5 +15,11 @@ namespace TeslaRentingApp
         public string? Email { get; set; }
         [Column("Usr_Phone")]
         public string? Phone { get; set; }
+        [Column("Usr_Login")]
+        public string? Login { get; set; }
+        [Column("Usr_Password")]
+        public string? Password { get; set; }
+        [Column("Usr_Salt")]
+        public byte[]? Salt { get; set; }
     }
 }

@@ -54,7 +54,7 @@ const User = () => {
     const updatedFormErrors = { ...formErrors };
 
     if (form.firstName === null || form.firstName === "") {
-      updatedFormErrors.firstName = "You must enter your name";
+      updatedFormErrors.firstName = "You must enter your first name";
       isValid = false;
     }
     else {

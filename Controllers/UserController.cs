@@ -33,7 +33,8 @@ namespace TeslaRentingApp
         {
             try
             {
-                return Ok(await _userRepository.CreateUnregisteredUser(userDto));
+                User? user = await _userRepository.CreateUnregisteredUser(userDto);
+                return ResponseUtility.OkOrBadRequest(user);
             }
             catch (Exception e)
             {
@@ -46,7 +47,8 @@ namespace TeslaRentingApp
         {
             try
             {
-                return Ok(await _userRepository.CreateRegisteredUser(userDto));
+                User? user = await _userRepository.CreateRegisteredUser(userDto);
+                return ResponseUtility.OkOrBadRequest(user);
             }
             catch (Exception e)
             {

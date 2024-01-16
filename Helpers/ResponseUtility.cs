@@ -23,5 +23,17 @@ namespace TeslaRentingApp.Helpers
                 return new NotFoundResult();
             }
         }
+
+        public static IActionResult OkOrBadRequest(object? obj)
+        {
+            if (obj != null)
+            {
+                return new OkObjectResult(obj);
+            }
+            else
+            {
+                return new BadRequestResult();
+            }
+        }
     }
 }

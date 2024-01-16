@@ -102,7 +102,8 @@ a {
 .summary-container,
 .reservation-container,
 .user-container,
-.reservation-container {
+.reservation-container,
+.registration-container {
   background-color: var(--color-theme3);
   margin: auto;
   margin-top: 60px;
@@ -118,7 +119,7 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr repeat(5, 0.2fr) 1fr;
-  grid-row-gap: 5px;
+  row-gap: 5px;
   text-align: center;
   align-items: center;
   min-width: 280px;
@@ -178,7 +179,7 @@ a {
   .search-form-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr repeat(11, 0.2fr);
-    grid-row-gap: 0;
+    row-gap: 0;
     grid-template-areas:
       "header"
       "loc-h-p"
@@ -299,7 +300,7 @@ input {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr repeat(6, 0.2fr) 1fr;
-  grid-row-gap: 5px;
+  row-gap: 5px;
   min-width: 300px;
   text-align: center;
   align-items: center;
@@ -317,40 +318,40 @@ input {
 .user-container h3 {
   grid-area: header;
 }
-.first-name-label {
+.user-container .first-name-label {
   grid-area: first-lab;
 }
-.last-name-label {
+.user-container .last-name-label {
   grid-area: last-lab;
 }
-.first-name-input {
+.user-container .first-name-input {
   grid-area: first-in;
 }
-.last-name-input {
+.user-container .last-name-input {
   grid-area: last-in;
 }
-.first-name-error {
+.user-container .first-name-error {
   grid-area: first-err;
 }
-.last-name-error {
+.user-container .last-name-error {
   grid-area: last-err;
 }
-.email-label {
+.user-container .email-label {
   grid-area: email-lab;
 }
-.phone-label {
+.user-container .phone-label {
   grid-area: phone-lab;
 }
-.email-input {
+.user-container .email-input {
   grid-area: email-in;
 }
-.phone-input {
+.user-container .phone-input {
   grid-area: phone-in;
 }
-.email-error {
+.user-container .email-error {
   grid-area: email-err;
 }
-.phone-error {
+.user-container .phone-error {
   grid-area: phone-err;
 }
 .user-container .btn-right {
@@ -361,7 +362,7 @@ input {
   .user-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr repeat(13, 0.2fr);
-    grid-row-gap: 0;
+    row-gap: 0;
     grid-template-areas:
       "header"
       "first-lab"
@@ -389,7 +390,7 @@ input {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 0.5fr repeat(4, 0.1fr);
   grid-column-gap: 50px;
-  grid-row-gap: 25px;
+  row-gap: 25px;
   grid-template-areas:
     "header header"
     "car user"
@@ -424,7 +425,7 @@ input {
   .summary-container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 0.2fr);
-    grid-row-gap: 0;
+    row-gap: 0;
     grid-template-areas:
       "header"
       "user"
@@ -548,9 +549,96 @@ img#gh-icon {
     width: 95%;
   }
 }
-
 /*#endregion*/
 
+/*#region Registration*/
+.registration-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr repeat(6, 0.2fr) 1fr;
+  min-width: 300px;
+  max-width: 500px;
+  row-gap: 5px;
+  text-align: center;
+  align-items: center;
+  grid-template-areas:
+    "header header"
+    "first-lab first-in"
+    "last-lab last-in"
+    "email-lab email-in"
+    "phone-lab phone-in"
+    "login-lab login-in"
+    "password-lab password-in"
+    ". btn";
+}
+
+.registration-container h3 {
+  grid-area: header;
+}
+.registration-container .first-name-label {
+  grid-area: first-lab;
+}
+.registration-container .first-name-input {
+  grid-area: first-in;
+}
+.registration-container .last-name-label {
+  grid-area: last-lab;
+}
+.registration-container .last-name-input {
+  grid-area: last-in;
+}
+.registration-container .email-label {
+  grid-area: email-lab;
+}
+.registration-container .email-input {
+  grid-area: email-in;
+}
+.registration-container .phone-label {
+  grid-area: phone-lab;
+}
+.registration-container .phone-input {
+  grid-area: phone-in;
+}
+.registration-container .login-label {
+  grid-area: login-lab;
+}
+.registration-container .login-input {
+  grid-area: login-in;
+}
+.registration-container .password-label {
+  grid-area: password-lab;
+}
+.registration-container .password-input {
+  grid-area: password-in;
+}
+.registration-container .btn-right {
+  grid-area: btn;
+}
+
+@media (max-width: 650px) {
+  .registration-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(12, 0.2fr) 1fr;
+    row-gap: 0;
+    grid-template-areas:
+      "header"
+      "first-lab"
+      "first-in"
+      "last-lab"
+      "last-in"
+      "email-lab"
+      "email-in"
+      "phone-lab"
+      "phone-in"
+      "login-lab"
+      "login-in"
+      "password-lab"
+      "password-in"
+      "btn";
+  }
+}
+
+/*#endregion*/
 
 /* div {
   border: 1px red solid;

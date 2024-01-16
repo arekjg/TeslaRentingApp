@@ -19,7 +19,7 @@ namespace TeslaRentingApp.Helpers
             string saltString = BitConverter.ToString(salt);
             string concatPswSalt = password + saltString;
 
-            Rfc2898DeriveBytes hash = new Rfc2898DeriveBytes(concatPswSalt, salt, 1000);
+            Rfc2898DeriveBytes hash = new(concatPswSalt, salt, 1000);
             byte[] hashBytes = hash.GetBytes(32);
             string hashString = BitConverter.ToString(hashBytes);
 

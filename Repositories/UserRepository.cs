@@ -20,10 +20,15 @@ namespace TeslaRentingApp
 
         public async Task<User?> CreateRegisteredUser(AddRegisteredUserDto userDto)
         {
+            if (userDto.Password == null)
+            {
+                return null;
+            }
+
             byte[] salt = Security.CreateSalt();
             string hashedPassword = Security.HashThePassword(userDto.Password, salt);
 
-            User user = new User()
+            User user = new()
             {
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
@@ -42,7 +47,7 @@ namespace TeslaRentingApp
 
         public async Task<User?> CreateUnregisteredUser(AddUnregisteredUserDto userDto)
         {
-            User user = new User()
+            User user = new()
             {
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,

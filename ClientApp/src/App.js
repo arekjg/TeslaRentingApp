@@ -7,6 +7,7 @@ import Confirmation from "./components/Confirmation";
 import User from "./components/User";
 import Summary from "./components/Summary";
 import Locations from "./components/Locations";
+import Registration from "./components/Registration";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/summary" element={<Summary />} />
           <Route path="/reservation" element={<Confirmation />} />
           <Route path="/locations" element={<Locations />} />
+          <Route path="/registration" element={<Registration />} />
         </Route>
       </Routes>
     </BrowserRouter>

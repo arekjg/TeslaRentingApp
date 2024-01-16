@@ -19,7 +19,8 @@ const Footer = () => {
         </a>
       </div>
       <div id="footer-center">
-        <Link to="/">Home</Link> | <Link to="/locations">Locations</Link>
+        <Link to="/">Home</Link> | <Link to="/locations">Locations</Link> |{" "}
+        <Link to="/registration">Sign up</Link> | Sign in
       </div>
     </div>
   );

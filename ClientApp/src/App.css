@@ -554,7 +554,7 @@ img#gh-icon {
 /*#region Registration*/
 .registration-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1.5fr;
   grid-template-rows: 1fr repeat(6, 0.2fr) 1fr;
   min-width: 300px;
   max-width: 500px;

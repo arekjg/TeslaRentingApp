@@ -56,37 +56,35 @@ const User = () => {
     if (form.firstName === null || form.firstName === "") {
       updatedFormErrors.firstName = "You must enter your first name";
       isValid = false;
-    }
-    else {
+    } else {
       updatedFormErrors.firstName = "";
     }
     if (form.lastName === null || form.lastName === "") {
       updatedFormErrors.lastName = "You must enter your last name";
       isValid = false;
-    }
-    else {
+    } else {
       updatedFormErrors.lastName = "";
     }
     if (form.email === null || form.email === "") {
       updatedFormErrors.email = "You must enter your email address";
       isValid = false;
-    }
-    else if (form.email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) === null) {
+    } else if (
+      form.email.match(
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      ) === null
+    ) {
       updatedFormErrors.email = "You must enter valid email address";
       isValid = false;
-    }
-    else {
+    } else {
       updatedFormErrors.email = "";
     }
     if (form.phone === null || form.phone === "") {
       updatedFormErrors.phone = "You must enter your phone number";
       isValid = false;
-    }
-    else if (form.phone.match(/^[0-9]+$/) === null) {
+    } else if (form.phone.match(/^[0-9]+$/) === null) {
       updatedFormErrors.phone = "You must enter only numbers";
       isValid = false;
-    }
-    else {
+    } else {
       updatedFormErrors.phone = "";
     }
 

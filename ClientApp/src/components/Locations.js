@@ -7,10 +7,10 @@ const Locations = () => {
       <iframe
         src="https://www.google.com/maps/d/embed?mid=134DaKCngAO_HSqxOBnbmF5OqsV-mNsI&ehbc=2E312F&noprof=1"
         style={{ border: 0 }}
-        allowfullscreen=""
+        allowFullScreen=""
         loading="lazy"
         aria-hidden="false"
-        referrerpolicy="no-referrer-when-downgrade"
+        referrerPolicy="no-referrer-when-downgrade"
         title="locations-map"
       ></iframe>
     </div>

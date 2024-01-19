@@ -86,10 +86,7 @@ const Summary = () => {
     e.preventDefault();
 
     const userResponseObject = await postUnregisteredUser(userData);
-    console.log(userResponseObject);
-    console.log(userResponseObject.data.id);
     reservationData.userId = userResponseObject.data.id;
-    console.log(reservationData);
     await postReservation(reservationData);
 
     navigate("/reservation");

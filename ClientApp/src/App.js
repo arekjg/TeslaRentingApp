@@ -7,7 +7,8 @@ import Confirmation from "./components/Confirmation";
 import User from "./components/User";
 import Summary from "./components/Summary";
 import Locations from "./components/Locations";
-import Registration from "./components/Registration";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
 
 function App() {
   return (
@@ -18,9 +19,17 @@ function App() {
           <Route path="/cars" element={<Cars />} />
           <Route path="/user" element={<User />} />
           <Route path="/summary" element={<Summary />} />
-          <Route path="/reservation" element={<Confirmation />} />
+          <Route
+            path="/reservation"
+            element={<Confirmation type={"reservation"} />}
+          />
           <Route path="/locations" element={<Locations />} />
-          <Route path="/registration" element={<Registration />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/registration"
+            element={<Confirmation type={"registration"} />}
+          />
+          <Route path="/signin" element={<Signin />} />
         </Route>
       </Routes>
     </BrowserRouter>

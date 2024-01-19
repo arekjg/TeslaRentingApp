@@ -53,19 +53,19 @@ const User = () => {
     let isValid = true;
     const updatedFormErrors = { ...formErrors };
 
-    if (form.firstName === null || form.firstName === "") {
+    if (form.firstName === "") {
       updatedFormErrors.firstName = "You must enter your first name";
       isValid = false;
     } else {
       updatedFormErrors.firstName = "";
     }
-    if (form.lastName === null || form.lastName === "") {
+    if (form.lastName === "") {
       updatedFormErrors.lastName = "You must enter your last name";
       isValid = false;
     } else {
       updatedFormErrors.lastName = "";
     }
-    if (form.email === null || form.email === "") {
+    if (form.email === "") {
       updatedFormErrors.email = "You must enter your email address";
       isValid = false;
     } else if (
@@ -78,7 +78,7 @@ const User = () => {
     } else {
       updatedFormErrors.email = "";
     }
-    if (form.phone === null || form.phone === "") {
+    if (form.phone === "") {
       updatedFormErrors.phone = "You must enter your phone number";
       isValid = false;
     } else if (form.phone.match(/^[0-9]+$/) === null) {

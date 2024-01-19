@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { postRegisteredUser } from "../fetcher";
+import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
+const Signup = () => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -10,8 +12,19 @@ const Registration = () => {
     password: "",
   });
 
+  const [formErrors, setFormErrors] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    phone: false,
+    login: false,
+    password: false,
+  });
+
   const [errorMessage, setErrorMessage] = useState("");
-  
+
+  const navigate = useNavigate();
+
   const handleFormChange = (e) => {
     let { name, value } = e.target;
 
@@ -23,51 +36,76 @@ const Registration = () => {
     });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     let isValid = validateForm();
 
     if (isValid) {
-      console.log(form);
-    } else {
-      console.log(errorMessage);
+      await postRegisteredUser(form);
+
+      navigate("/registration");
     }
   };
 
   const validateForm = () => {
     let isValid = true;
+    const updatedFormErrors = { ...formErrors };
     let message = "";
 
-    if (
-      form.firstName === null ||
-      form.firstName === "" ||
-      form.lastName === null ||
-      form.lastName === "" ||
-      form.email === null ||
-      form.email === "" ||
-      form.phone === null ||
-      form.phone === "" ||
-      form.login === null ||
-      form.login === "" ||
-      form.password === null ||
-      form.password === ""
-    ) {
-      message = "You must fill all fields in the form.";
+    if (form.firstName === "") {
+      updatedFormErrors.firstName = true;
+      isValid = false;
+    } else {
+      updatedFormErrors.firstName = false;
+    }
+    if (form.lastName === "") {
+      updatedFormErrors.lastName = true;
+      isValid = false;
+    } else {
+      updatedFormErrors.lastName = false;
+    }
+    if (form.email === "") {
+      updatedFormErrors.email = true;
       isValid = false;
     } else if (
       form.email.match(
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
       ) === null
     ) {
-      message = "You must enter valid email address";
+      updatedFormErrors.email = true;
+      isValid = false;
+    } else {
+      updatedFormErrors.email = false;
+    }
+    if (form.phone === "") {
+      updatedFormErrors.phone = true;
       isValid = false;
     } else if (form.phone.match(/^[0-9]+$/) === null) {
-      message = "You must enter only numbers";
+      updatedFormErrors.phone = true;
       isValid = false;
+    } else {
+      updatedFormErrors.phone = false;
+    }
+    if (form.login === "") {
+      updatedFormErrors.login = true;
+      isValid = false;
+    } else {
+      updatedFormErrors.login = false;
+    }
+    if (form.password === "") {
+      updatedFormErrors.password = true;
+      isValid = false;
+    } else {
+      updatedFormErrors.password = false;
+    }
+
+    if (!isValid) {
+      message = "Empty or invalid input";
     }
 
     setErrorMessage(message);
+    setFormErrors(updatedFormErrors);
     return isValid;
   };
 
@@ -80,7 +118,7 @@ const Registration = () => {
       <input
         type="text"
         name="firstName"
-        className="first-name-input"
+        className={`first-name-input ${formErrors.firstName && "error"}`}
         placeholder="First name"
         onChange={handleFormChange}
         required
@@ -91,7 +129,7 @@ const Registration = () => {
       <input
         type="text"
         name="lastName"
-        className="last-name-input"
+        className={`last-name-input ${formErrors.lastName && "error"}`}
         placeholder="Last name"
         onChange={handleFormChange}
         required
@@ -102,7 +140,7 @@ const Registration = () => {
       <input
         type="text"
         name="email"
-        className="email-input"
+        className={`email-input" ${formErrors.email && "error"}`}
         placeholder="Email address"
         onChange={handleFormChange}
         required
@@ -113,7 +151,7 @@ const Registration = () => {
       <input
         type="text"
         name="phone"
-        className="phone-input"
+        className={`phone-input ${formErrors.phone && "error"}`}
         placeholder="Phone #"
         onChange={handleFormChange}
         required
@@ -124,7 +162,7 @@ const Registration = () => {
       <input
         type="text"
         name="login"
-        className="login-input"
+        className={`login-input ${formErrors.login && "error"}`}
         placeholder="Login"
         onChange={handleFormChange}
         required
@@ -135,7 +173,7 @@ const Registration = () => {
       <input
         type="password"
         name="password"
-        className="password-input"
+        className={`password-input ${formErrors.password && "error"}`}
         placeholder="Password"
         onChange={handleFormChange}
         required
@@ -150,4 +188,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Signup;

@@ -103,7 +103,8 @@ a {
 .reservation-container,
 .user-container,
 .reservation-container,
-.registration-container {
+.registration-container,
+.login-container {
   background-color: var(--color-theme3);
   margin: auto;
   margin-top: 60px;
@@ -503,7 +504,7 @@ button:active {
 
 .btn-right {
   text-align: right;
-  margin-top: 30px;
+  margin-top: 15px;
 }
 /*#endregion*/
 
@@ -638,6 +639,62 @@ img#gh-icon {
   }
 }
 
+/*#endregion*/
+
+/*#region Login*/
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: 1fr 0.5fr 0.5fr 0.2fr 1fr;
+  min-width: 300px;
+  max-width: 400px;
+  row-gap: 5px;
+  text-align: center;
+  align-items: center;
+  grid-template-areas:
+  "header header"
+  "ll li"
+  "pl pi"
+  "er er"
+  ". btn";
+}
+
+.login-container h3 {
+  grid-area: header;
+}
+.login-container .login-label {
+  grid-area: ll;
+}
+.login-container .login-input {
+  grid-area: li;
+}
+.login-container .password-label {
+  grid-area: pl;
+}
+.login-container .password-input {
+  grid-area: pi;
+}
+.login-container .error-message {
+  grid-area: er;
+}
+.login-container .btn-right {
+  grid-area: btn;
+}
+
+@media (max-width: 650px) {
+  .login-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(4, 0.2fr) 1fr;
+    row-gap: 0;
+    grid-template-areas:
+    "header"
+    "ll"
+    "li"
+    "pl"
+    "pi"
+    "btn";
+  }
+}
 /*#endregion*/
 
 /* div {

@@ -9,4 +9,3 @@ namespace TeslaRentingApp
         Task<User?> CreateUnregisteredUser(AddUnregisteredUserDto userDto);
     }
 }
- 

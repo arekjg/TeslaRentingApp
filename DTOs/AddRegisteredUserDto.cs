@@ -1,4 +1,4 @@
-﻿namespace TeslaRentingApp.DTOs
+﻿namespace TeslaRentingApp
 {
     public class AddRegisteredUserDto
     {

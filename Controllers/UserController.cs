@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TeslaRentingApp.DTOs;
-using TeslaRentingApp.Helpers;
 
 namespace TeslaRentingApp
 {
@@ -19,7 +17,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                User? user = await _userRepository.GetUser(id);
+                User? user = await _userRepository.GetUserById(id);
                 return ResponseUtility.OkOrNotFound(user);
             }
             catch (Exception e)
@@ -49,6 +47,20 @@ namespace TeslaRentingApp
             {
                 User? user = await _userRepository.CreateRegisteredUser(userDto);
                 return ResponseUtility.OkOrBadRequest(user);
+            }
+            catch (Exception e)
+            {
+                return ResponseUtility.InternalServerError(e);
+            }
+        }
+
+        [HttpPut("s")]
+        public async Task<IActionResult> PutSignInUser(SignInUserDto signInUserDto)
+        {
+            try
+            {
+                Guid? guid = await _userRepository.GenerateUserToken(signInUserDto);
+                return ResponseUtility.OkOrBadRequest(guid);
             }
             catch (Exception e)
             {

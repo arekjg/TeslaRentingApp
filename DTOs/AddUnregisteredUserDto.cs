@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TeslaRentingApp.DTOs
+﻿namespace TeslaRentingApp
 {
     public class AddUnregisteredUserDto
     {

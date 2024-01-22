@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -74,7 +75,8 @@ namespace TeslaRentingApp.Migrations
                     Usr_Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Usr_Login = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Usr_Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Usr_Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Usr_Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Usr_SessionToken = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {

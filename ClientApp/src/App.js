@@ -30,6 +30,10 @@ function App() {
             element={<Confirmation type={"registration"} />}
           />
           <Route path="/signin" element={<Signin />} />
+          <Route
+            path="/loggedin"
+            element={<Confirmation type={"loggedin"} />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

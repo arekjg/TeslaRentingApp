@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TeslaRentingApp.Helpers
+namespace TeslaRentingApp
 {
     public class ResponseUtility
     {

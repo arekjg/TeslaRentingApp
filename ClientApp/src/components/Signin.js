@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { putSignInUser } from "../fetcher";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [form, setForm] = useState({
@@ -13,6 +15,8 @@ const Signin = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const navigate = useNavigate();
+
   const handleFormChange = (e) => {
     let { name, value } = e.target;
 
@@ -24,13 +28,18 @@ const Signin = () => {
     });
   };
 
-  const handleSignin = (e) => {
+  const handleSignin = async (e) => {
     e.preventDefault();
 
     let isValid = validateForm();
 
     if (isValid) {
-      console.log("OK");
+      const guid = await putSignInUser(form);
+      if (guid.error === "400") {
+        setErrorMessage("Wrong login or password!");
+      } else {
+        navigate("/loggedin");
+      }
     }
   };
 

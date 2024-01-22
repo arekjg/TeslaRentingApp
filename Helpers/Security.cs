@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace TeslaRentingApp.Helpers
+namespace TeslaRentingApp
 {
     public static class Security
     {

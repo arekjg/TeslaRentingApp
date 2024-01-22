@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TeslaRentingApp.Helpers;
 
 namespace TeslaRentingApp
 {

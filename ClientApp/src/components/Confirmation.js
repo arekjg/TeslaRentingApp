@@ -11,6 +11,9 @@ const Confirmation = ({ type }) => {
   } else if (type === "registration") {
     header = "You successfully created an account";
     message = "You can return to home page or sign in";
+  } else if (type === "loggedin") {
+    header = "Hello again!";
+    message = "You can manage your reservations now.";
   }
 
   return (
@@ -20,6 +23,9 @@ const Confirmation = ({ type }) => {
       <div className="btn-right">
         {type === "registration" && (
           <button onClick={() => navigate("/signin")}>Sign in</button>
+        )}
+        {type === "loggedin" && (
+          <button onClick={() => navigate("/account")}>Account</button>
         )}
         <button onClick={() => navigate("/")}>Home</button>
       </div>

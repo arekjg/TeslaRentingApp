@@ -21,5 +21,7 @@ namespace TeslaRentingApp
         public string? Password { get; set; }
         [Column("Usr_Salt")]
         public byte[]? Salt { get; set; }
+        [Column("Usr_SessionToken")]
+        public Guid? Token { get; set; }
     }
 }

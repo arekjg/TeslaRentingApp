@@ -5,7 +5,7 @@ const fetcherGet = async (url) => {
   try {
     const response = await fetch(baseURL + url);
     if (!response.ok) {
-      throw new Error(`HTTP Error ${response.status}`);
+      throw new Error(response.status);
     }
     const responseData = await response.json();
     responseObject.errorMessage = "";
@@ -27,13 +27,35 @@ const fetcherPost = async (url, data) => {
       },
     });
     if (!response.ok) {
-      throw new Error(`HTTP Error ${response.status}`);
+      throw new Error(response.status);
     }
     const responseData = await response.json();
     responseObject.errorMessage = "";
     responseObject.data = responseData;
   } catch (error) {
     responseObject.errorMessage = error.message;
+  }
+  return responseObject;
+};
+
+const fetcherPut = async (url, data) => {
+  let responseObject = { errorMessage: "", data: {} };
+  try {
+    const response = await fetch(baseURL + url, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    const responseData = await response.json();
+    responseObject.errorMessage = "";
+    responseObject.data = responseData;
+  } catch (error) {
+    responseObject.error = error.message;
   }
   return responseObject;
 };
@@ -80,4 +102,8 @@ export const postUnregisteredUser = (data) => {
 
 export const postRegisteredUser = (data) => {
   return fetcherPost("api/users/r", data);
+};
+
+export const putSignInUser = (data) => {
+  return fetcherPut("api/users/s", data);
 };

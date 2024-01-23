@@ -10,7 +10,9 @@
 
 
 ## General information
-This is a car renting web application that simplifies the process of reserving a Tesla car. With this app, users can choose their pick-up and return dates, pick-up and return locations (which can be the same or different) and browse from a range of 10 Tesla car models.
+This is a car renting web application that simplifies the process of reserving a Tesla car. With this app, users can choose their pick-up and return dates, pick-up and return locations (which can be the same or different) and browse from a range of 10 Tesla car models.\
+The app calculates the cost of the rental and saves the reservation in the database.\
+The user can also create an account (register). Signing in is yet to be created.
 
 
 ## Technologies used
@@ -64,7 +66,7 @@ The app will start at `https://localhost:7292/` and then redirect to `https://lo
 TeslaRentingDB consists of 4 tables:
 * dbo.Models - stores models data like name, price and car's details
 * dbo.Locations - stores names of available locations
-* dbo.Users - stores drivers' details like name, email, phone number
+* dbo.Users - stores drivers' details like name, email, phone number, hashed password, token for opened session
 * dbo.Reservations - stores reservations details like pick up and return dates and locations, related model and user, overall renting cost
 
 Database diagram:

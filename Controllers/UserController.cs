@@ -17,7 +17,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                User? user = await _userRepository.GetUserById(id);
+                var user = await _userRepository.GetUserById(id);
                 return ResponseUtility.OkOrNotFound(user);
             }
             catch (Exception e)
@@ -31,7 +31,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                User? user = await _userRepository.CreateUnregisteredUser(userDto);
+                var user = await _userRepository.CreateUnregisteredUser(userDto);
                 return ResponseUtility.OkOrBadRequest(user);
             }
             catch (Exception e)
@@ -45,7 +45,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                User? user = await _userRepository.CreateRegisteredUser(userDto);
+                var user = await _userRepository.CreateRegisteredUser(userDto);
                 return ResponseUtility.OkOrBadRequest(user);
             }
             catch (Exception e)
@@ -55,12 +55,12 @@ namespace TeslaRentingApp
         }
 
         [HttpPut("s")]
-        public async Task<IActionResult> PutSignInUser(SignInUserDto signInUserDto)
+        public async Task<IActionResult> PutSignInUser(SignInDto signInUserDto)
         {
             try
             {
-                Guid? guid = await _userRepository.GenerateUserToken(signInUserDto);
-                return ResponseUtility.OkOrBadRequest(guid);
+                var user = await _userRepository.GetAuthenticatedUser(signInUserDto);
+                return ResponseUtility.OkOrBadRequest(user);
             }
             catch (Exception e)
             {

@@ -2,10 +2,10 @@
 {
     public interface IUserRepository
     {
-        Task<User?> GetUserById(int id);
-        Task<User?> GetUserByLogin(string login);
-        Task<User?> CreateRegisteredUser(AddRegisteredUserDto userDto);
-        Task<User?> CreateUnregisteredUser(AddUnregisteredUserDto userDto);
-        Task<Guid?> GenerateUserToken(SignInUserDto signInUserDto);
+        Task<GetUserDto?> GetUserById(int id);
+        Task<GetUserDto?> GetUserByLogin(string login);
+        Task<SigningStatus> CreateRegisteredUser(AddRegisteredUserDto userDto);
+        Task<GetUserDto?> CreateUnregisteredUser(AddUnregisteredUserDto userDto);
+        Task<SigningStatus> GetAuthenticatedUser(SignInDto signInUserDto);
     }
 }

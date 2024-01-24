@@ -42,9 +42,13 @@ const Signup = () => {
     let isValid = validateForm();
 
     if (isValid) {
-      await postRegisteredUser(form);
+      const responseObject = await postRegisteredUser(form);
 
-      navigate("/registration");
+      if (responseObject.data.getUserDto) {
+        navigate("/registration");
+      } else {
+        setErrorMessage(responseObject.data.message);
+      }
     }
   };
 

@@ -34,11 +34,12 @@ const Signin = () => {
     let isValid = validateForm();
 
     if (isValid) {
-      const guid = await putSignInUser(form);
-      if (guid.error === "400") {
-        setErrorMessage("Wrong login or password!");
-      } else {
+      const responseObject = await putSignInUser(form);
+
+      if (responseObject.data.getUserDto) {
         navigate("/loggedin");
+      } else {
+        setErrorMessage(responseObject.data.message);
       }
     }
   };

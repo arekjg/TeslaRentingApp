@@ -119,10 +119,11 @@ const Signup = () => {
   return (
     <>
       {user && (
-        <div className="registration-container">
-          You're logged in. Logout to create and account.
+        <div className="registration-container" style={{ gridTemplateRows: "1fr" }}>
+          <h3>You're signed in.<br />Logout to create an account.</h3>
         </div>
       )}
+      
       {!user && (
         <form className="registration-container">
           <h3>Register</h3>

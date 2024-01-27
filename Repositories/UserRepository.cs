@@ -133,5 +133,36 @@ namespace TeslaRentingApp
             var user = _context.Users.FirstOrDefault(u => u.Email == userDto.Email && u.Login != null);
             return !(user == null);
         }
+
+        public async Task<GetUserDto?> UpdateUser(UpdateUserDto updatedUserDto)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == updatedUserDto.Id);
+            var getUserDto = new GetUserDto();
+            
+            if (user == null)
+            {
+                return getUserDto;
+            }
+
+            //string hashedPassword = Security.HashThePassword(updatedUserDto.Password, user.Salt);
+
+            user.FirstName = updatedUserDto.FirstName;
+            user.LastName = updatedUserDto.LastName;
+            user.Phone = updatedUserDto.Phone;
+            //user.Password = hashedPassword;
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            getUserDto.Id = user.Id;
+            getUserDto.FirstName = user.FirstName;
+            getUserDto.LastName = user.LastName;
+            getUserDto.Email = user.Email;
+            getUserDto.Phone = user.Phone;
+            getUserDto.Login = user.Login;
+            getUserDto.Token = user.Token;
+
+            return getUserDto;
+        }
     }
 }

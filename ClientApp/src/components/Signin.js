@@ -81,7 +81,11 @@ const Signin = () => {
 
   return (
     <>
-      {user && <div className="login-container">You're already signed in!</div>}
+      {user && (
+        <div className="login-container" style={{ gridTemplateRows: "1fr" }}>
+          <h3>You're already signed in.</h3>
+        </div>
+      )}
 
       {!user && (
         <form className="login-container">

@@ -111,3 +111,7 @@ export const putSignIn = (data) => {
 export const putSignOut = (data) => {
   return fetcherPut("api/sign/out", data);
 };
+
+export const putUser = (data) => {
+  return fetcherPut("api/users", data);
+};

@@ -93,8 +93,8 @@ a {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 0.2fr;
     grid-template-areas:
-    "tesla"
-    "user";
+      "tesla"
+      "user";
   }
   .head-left {
     display: none;
@@ -125,9 +125,10 @@ a {
 .summary-container,
 .reservation-container,
 .user-container,
-.reservation-container,
 .registration-container,
-.login-container {
+.login-container,
+.settings-container,
+.edit-user-container {
   background-color: var(--color-theme3);
   margin: auto;
   margin-top: 60px;
@@ -529,6 +530,11 @@ button:active {
   text-align: right;
   margin-top: 15px;
 }
+
+.btn-center {
+  text-align: center;
+  margin-top: 15px;
+}
 /*#endregion*/
 
 /*#region Footer*/
@@ -717,6 +723,113 @@ img#gh-icon {
       "pi"
       "btn";
   }
+}
+/*#endregion*/
+
+/*#region Settings*/
+.settings-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: 1fr repeat(4, 0.2fr);
+  min-width: 200px;
+  max-width: 350px;
+  row-gap: 5px;
+  text-align: center;
+  align-items: center;
+  grid-template-areas:
+    "header header"
+    "first-lab first-val"
+    "last-lab last-val"
+    "phone-lab phone-val"
+    "password-lab password-val";
+}
+
+.settings-container h3 {
+  grid-area: header;
+}
+.settings-container .first-name-label {
+  grid-area: first-lab;
+}
+.settings-container .first-name-value {
+  grid-area: first-val;
+}
+.settings-container .last-name-label {
+  grid-area: last-lab;
+}
+.settings-container .last-name-value {
+  grid-area: last-val;
+}
+.settings-container .phone-label {
+  grid-area: phone-lab;
+}
+.settings-container .phone-value {
+  grid-area: phone-val;
+}
+.settings-container .password-label {
+  grid-area: password-lab;
+}
+.settings-container .password-value {
+  grid-area: password-val;
+}
+
+.edit-icon {
+  height: 15px;
+  transform: translateY(-2px);
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .settings-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(8, 0.2fr);
+    row-gap: 0;
+    grid-template-areas:
+      "header"
+      "first-lab"
+      "first-val"
+      "last-lab"
+      "last-val"
+      "phone-lab"
+      "phone-val"
+      "password-lab"
+      "password-val";
+  }
+}
+
+/*#endregion*/
+
+/*#region EditUser*/
+.edit-user-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.2fr 1fr;
+  min-width: 300px;
+  max-width: 350px;
+  row-gap: 5px;
+  text-align: center;
+  align-items: center;
+  grid-template-areas:
+  "header"
+  "input"
+  "btn";;
+}
+
+.edit-user-container h3 {
+  grid-area: header;
+}
+.edit-user-container .input {
+  grid-area: input;
+}
+.edit-user-container .btn-center {
+  grid-area: btn;
+}
+
+.edit-icon {
+  height: 15px;
+  transform: translateY(-2px);
 }
 /*#endregion*/
 

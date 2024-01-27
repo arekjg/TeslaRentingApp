@@ -6,5 +6,6 @@
         Task<GetUserDto?> GetUserByLogin(string login);
         Task<SigningStatus> CreateRegisteredUser(AddRegisteredUserDto userDto);
         Task<GetUserDto?> CreateUnregisteredUser(AddUnregisteredUserDto userDto);
+        Task<GetUserDto?> UpdateUser(UpdateUserDto updatedUserDto);
     }
 }

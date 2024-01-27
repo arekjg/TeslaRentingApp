@@ -17,7 +17,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                List<Reservation> reservations = await _reservationRepository.GetReservations();
+                var reservations = await _reservationRepository.GetReservations();
                 return Ok(reservations);
             }
             catch (Exception e)
@@ -27,11 +27,11 @@ namespace TeslaRentingApp
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetReservationByUuid(int id)
+        public async Task<IActionResult> GetReservationById(int id)
         {
             try
             {
-                Reservation? reservation = await _reservationRepository.GetReservation(id);
+                var reservation = await _reservationRepository.GetReservation(id);
                 return ResponseUtility.OkOrNotFound(reservation);
             }
             catch (Exception e)
@@ -58,7 +58,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                Reservation? reservation = await _reservationRepository.UpdateReservation(updatedReservation);
+                var reservation = await _reservationRepository.UpdateReservation(updatedReservation);
                 return ResponseUtility.OkOrNotFound(reservation);
             }
             catch (Exception e)
@@ -72,7 +72,7 @@ namespace TeslaRentingApp
         {
             try
             {
-                Reservation? reservation = await _reservationRepository.GetReservation(id);
+                var reservation = await _reservationRepository.GetReservation(id);
                 return ResponseUtility.OkOrNotFound(reservation);
             }
             catch (Exception e)

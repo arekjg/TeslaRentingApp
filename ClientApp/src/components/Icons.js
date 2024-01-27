@@ -30,3 +30,9 @@ export const RangeIcon = ({ range }) => (
     {range} mi
   </span>
 );
+
+export const EditIcon = () => (
+  <span title="Edit">
+    <img src="../images/EditIcon.svg" className="edit-icon svg-icon" alt="" />
+  </span>
+);

@@ -49,22 +49,23 @@ a {
 
 .nav-bar::after {
   display: grid;
-  grid-template-columns: 0.2fr 1fr 0.2fr;
   grid-template-areas: "left center right";
 }
 
 .head-left {
   grid-area: left;
-  width: 20%;
+  width: 30%;
 }
 .head-center {
   grid-area: center;
-  width: 60%;
+  width: 40%;
 }
 .head-right {
   grid-area: right;
-  width: 20%;
+  width: 30%;
   text-align: right;
+  padding-top: 25px;
+  padding-right: 25px;
 }
 
 .column {
@@ -83,15 +84,31 @@ a {
   width: 200px;
 }
 
+#logout:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 650px) {
   .nav-bar::after {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.2fr;
+    grid-template-areas:
+    "tesla"
+    "user";
   }
   .head-left {
     display: none;
   }
   .head-center {
     width: 100%;
+    grid-area: tesla;
+  }
+  .head-right {
+    grid-area: user;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
   }
 }
 /*#endregion*/

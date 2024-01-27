@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { postRegisteredUser } from "../fetcher";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -22,6 +23,8 @@ const Signup = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -114,81 +117,92 @@ const Signup = () => {
   };
 
   return (
-    <form className="registration-container">
-      <h3>Register</h3>
+    <>
+      {user && (
+        <div className="registration-container">
+          You're logged in. Logout to create and account.
+        </div>
+      )}
+      {!user && (
+        <form className="registration-container">
+          <h3>Register</h3>
 
-      <label className="first-name-label">First name:</label>
+          <label className="first-name-label">First name:</label>
 
-      <input
-        type="text"
-        name="firstName"
-        className={`first-name-input ${formErrors.firstName && "error"}`}
-        placeholder="First name"
-        onChange={handleFormChange}
-        required
-      ></input>
+          <input
+            type="text"
+            name="firstName"
+            className={`first-name-input ${formErrors.firstName && "error"}`}
+            placeholder="First name"
+            onChange={handleFormChange}
+            required
+          ></input>
 
-      <label className="last-name-label">Last name:</label>
+          <label className="last-name-label">Last name:</label>
 
-      <input
-        type="text"
-        name="lastName"
-        className={`last-name-input ${formErrors.lastName && "error"}`}
-        placeholder="Last name"
-        onChange={handleFormChange}
-        required
-      ></input>
+          <input
+            type="text"
+            name="lastName"
+            className={`last-name-input ${formErrors.lastName && "error"}`}
+            placeholder="Last name"
+            onChange={handleFormChange}
+            required
+          ></input>
 
-      <label className="email-label">Email:</label>
+          <label className="email-label">Email:</label>
 
-      <input
-        type="text"
-        name="email"
-        className={`email-input" ${formErrors.email && "error"}`}
-        placeholder="Email address"
-        onChange={handleFormChange}
-        required
-      ></input>
+          <input
+            type="text"
+            name="email"
+            className={`email-input" ${formErrors.email && "error"}`}
+            placeholder="Email address"
+            onChange={handleFormChange}
+            required
+          ></input>
 
-      <label className="phone-label">Phone #:</label>
+          <label className="phone-label">Phone #:</label>
 
-      <input
-        type="text"
-        name="phone"
-        className={`phone-input ${formErrors.phone && "error"}`}
-        placeholder="Phone #"
-        onChange={handleFormChange}
-        required
-      ></input>
+          <input
+            type="text"
+            name="phone"
+            className={`phone-input ${formErrors.phone && "error"}`}
+            placeholder="Phone #"
+            onChange={handleFormChange}
+            required
+          ></input>
 
-      <label className="login-label">Login:</label>
+          <label className="login-label">Login:</label>
 
-      <input
-        type="text"
-        name="login"
-        className={`login-input ${formErrors.login && "error"}`}
-        placeholder="Login"
-        onChange={handleFormChange}
-        required
-      ></input>
+          <input
+            type="text"
+            name="login"
+            className={`login-input ${formErrors.login && "error"}`}
+            placeholder="Login"
+            onChange={handleFormChange}
+            required
+          ></input>
 
-      <label className="password-label">Password:</label>
+          <label className="password-label">Password:</label>
 
-      <input
-        type="password"
-        name="password"
-        className={`password-input ${formErrors.password && "error"}`}
-        placeholder="Password"
-        onChange={handleFormChange}
-        required
-      ></input>
+          <input
+            type="password"
+            name="password"
+            className={`password-input ${formErrors.password && "error"}`}
+            placeholder="Password"
+            onChange={handleFormChange}
+            required
+          ></input>
 
-      {errorMessage && <span className="error-message">{errorMessage}</span>}
+          {errorMessage && (
+            <span className="error-message">{errorMessage}</span>
+          )}
 
-      <div className="btn-right">
-        <button onClick={handleRegister}>Register</button>
-      </div>
-    </form>
+          <div className="btn-right">
+            <button onClick={handleRegister}>Register</button>
+          </div>
+        </form>
+      )}
+    </>
   );
 };
 

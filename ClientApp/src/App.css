@@ -1,7 +1,7 @@
 :root {
-  --color-main: #0A0908;
-  --color-theme1: #22223B;
-  --color-theme2: #4A4E69;
+  --color-main: #0a0908;
+  --color-theme1: #22223b;
+  --color-theme2: #4a4e69;
   --color-theme3: #383838;
   --text-dark: #000;
   --text-light: #d8d8d8;
@@ -30,7 +30,8 @@ h3 {
 }
 
 .svg-icon {
-  filter: invert(77%) sepia(0%) saturate(652%) hue-rotate(219deg) brightness(104%) contrast(118%);
+  filter: invert(77%) sepia(0%) saturate(652%) hue-rotate(219deg)
+    brightness(104%) contrast(118%);
 }
 
 a {
@@ -48,8 +49,8 @@ a {
 
 .nav-bar::after {
   display: grid;
-  grid-template-columns: 0.2fr 1fr;
-  grid-template-areas: "left center";
+  grid-template-columns: 0.2fr 1fr 0.2fr;
+  grid-template-areas: "left center right";
 }
 
 .head-left {
@@ -59,6 +60,11 @@ a {
 .head-center {
   grid-area: center;
   width: 60%;
+}
+.head-right {
+  grid-area: right;
+  width: 20%;
+  text-align: right;
 }
 
 .column {
@@ -652,11 +658,11 @@ img#gh-icon {
   text-align: center;
   align-items: center;
   grid-template-areas:
-  "header header"
-  "ll li"
-  "pl pi"
-  "er er"
-  ". btn";
+    "header header"
+    "ll li"
+    "pl pi"
+    "er er"
+    ". btn";
 }
 
 .login-container h3 {
@@ -687,12 +693,12 @@ img#gh-icon {
     grid-template-rows: 1fr repeat(4, 0.2fr) 1fr;
     row-gap: 0;
     grid-template-areas:
-    "header"
-    "ll"
-    "li"
-    "pl"
-    "pi"
-    "btn";
+      "header"
+      "ll"
+      "li"
+      "pl"
+      "pi"
+      "btn";
   }
 }
 /*#endregion*/

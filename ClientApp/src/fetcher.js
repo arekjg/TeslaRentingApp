@@ -104,6 +104,10 @@ export const postRegisteredUser = (data) => {
   return fetcherPost("api/users/r", data);
 };
 
-export const putSignInUser = (data) => {
-  return fetcherPut("api/users/s", data);
+export const putSignIn = (data) => {
+  return fetcherPut("api/sign/in", data);
+};
+
+export const putSignOut = (data) => {
+  return fetcherPut("api/sign/out", data);
 };

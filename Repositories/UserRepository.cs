@@ -122,55 +122,6 @@ namespace TeslaRentingApp
             return getUserDto;
         }
 
-        public async Task<SigningStatus> GetAuthenticatedUser(SignInDto signInUserDto)
-        {
-            var user = _context.Users.FirstOrDefault(u => u.Login == signInUserDto.Login);
-            var getUserDto = new GetUserDto();
-
-            if (!AuthenticateUser(signInUserDto))
-            {
-                return new SigningStatus() { Message = "Your login and/or password is incorrect" };
-            }
-
-            if (user == null)
-            {
-                return new SigningStatus() { Message = "User not found" };
-            }
-
-            user.Token = Guid.NewGuid();
-
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-
-            getUserDto = new GetUserDto()
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Phone = user.Phone,
-                Login = user.Login,
-                Token = user.Token
-            };
-
-            return new SigningStatus() { GetUserDto = getUserDto };
-        }
-
-        public bool AuthenticateUser(SignInDto signInUserDto)
-        {
-            var user = _context.Users.FirstOrDefault(u => u.Login == signInUserDto.Login);
-
-            if (user == null)
-            {
-                return false;
-            }
-            else
-            {
-                string hashedPsw = Security.HashThePassword(signInUserDto.Password, user.Salt);
-                return hashedPsw == user.Password;
-            }
-        }
-
         public bool LoginExists(AddRegisteredUserDto userDto)
         {
             var user = _context.Users.FirstOrDefault(u => u.Login == userDto.Login && u.Login != null);

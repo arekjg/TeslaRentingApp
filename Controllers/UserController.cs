@@ -53,19 +53,5 @@ namespace TeslaRentingApp
                 return ResponseUtility.InternalServerError(e);
             }
         }
-
-        [HttpPut("s")]
-        public async Task<IActionResult> PutSignInUser(SignInDto signInUserDto)
-        {
-            try
-            {
-                var user = await _userRepository.GetAuthenticatedUser(signInUserDto);
-                return ResponseUtility.OkOrBadRequest(user);
-            }
-            catch (Exception e)
-            {
-                return ResponseUtility.InternalServerError(e);
-            }
-        }
     }
 }

@@ -15,6 +15,10 @@ const Navigation = () => {
           <img src={"../images/tesla_logo_400x60.png"} alt="logo2" />
         </Link>
       </div>
+
+      <div className="column head-right">
+        <Link to="/signin">Sign In</Link>
+      </div>
     </div>
   );
 };

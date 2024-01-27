@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { putSignInUser } from "../fetcher";
+import { putSignIn } from "../fetcher";
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
@@ -34,7 +34,7 @@ const Signin = () => {
     let isValid = validateForm();
 
     if (isValid) {
-      const responseObject = await putSignInUser(form);
+      const responseObject = await putSignIn(form);
 
       if (responseObject.data.getUserDto) {
         navigate("/loggedin");

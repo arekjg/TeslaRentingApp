@@ -67,5 +67,19 @@ namespace TeslaRentingApp
                 return ResponseUtility.InternalServerError(e);
             }
         }
+
+        [HttpPut("psw")]
+        public async Task<IActionResult> PutPassword(UpdatePasswordDto updatedPasswordDto)
+        {
+            try
+            {
+                var getUserDto = await _userRepository.UpdatePassword(updatedPasswordDto);
+                return ResponseUtility.OkOrBadRequest(getUserDto);
+            }
+            catch (Exception e)
+            {
+                return ResponseUtility.InternalServerError(e);
+            }
+        }
     }
 }

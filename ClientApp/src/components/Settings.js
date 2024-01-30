@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../App";
 import { EditIcon } from "./Icons";
-import { putUser } from "../fetcher";
+import { putPsw, putUser } from "../fetcher";
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext);
@@ -13,6 +13,11 @@ const Settings = () => {
     firstName: user.firstName,
     lastName: user.lastName,
     phone: user.phone,
+  });
+
+  const [pswObj, setPassword] = useState({
+    id: user.id,
+    password: "",
   });
 
   const handleEditClick = (field) => {
@@ -30,6 +35,17 @@ const Settings = () => {
     });
   };
 
+  const handlePasswordChange = async (e) => {
+    let { name, value } = e.target;
+
+    setPassword((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
   const handleCancelChanges = () => {
     setEditField("");
   };
@@ -37,12 +53,10 @@ const Settings = () => {
   const handleSaveChanges = async (e) => {
     e.preventDefault();
 
-    let isValid = true;
+    let isValid = validateEditForm();
 
     if (isValid) {
       const responseObject = await putUser(updatedUser);
-
-      console.log(responseObject);
 
       if (responseObject.data) {
         setUser(responseObject.data);
@@ -51,16 +65,56 @@ const Settings = () => {
     }
   };
 
-  const handlePasswordChange = async (e) => {
+  const handleSavePassword = async (e) => {
     e.preventDefault();
-    // TODO
-    console.log("psw");
+
+    let isValid = validatePassword();
+
+    if (isValid) {
+      console.log(pswObj);
+      const responseObject = await putPsw(pswObj);
+
+      console.log(responseObject);
+
+      if (responseObject.data) {
+        setEditField("");
+      }
+      setEditField("");
+    }
   };
 
-  // TODO: validation
+  const validateEditForm = () => {
+    let isValid = true;
+
+    if (editField === "firstName" && updatedUser.firstName === "") {
+      isValid = false;
+    } else if (editField === "lastName" && updatedUser.lastName === "") {
+      isValid = false;
+    } else if (
+      editField === "phone" &&
+      (updatedUser.phone === "" || updatedUser.phone.match(/^[0-9]+$/) === null)
+    ) {
+      isValid = false;
+    }
+
+    // TODO: add error message
+
+    return isValid;
+  };
+
+  const validatePassword = () => {
+    let isValid = true;
+
+    if (editField === "password" && pswObj.password === "") {
+      isValid = false;
+    }
+
+    //TODO: add error message
+
+    return isValid;
+  };
 
   const renderEditForm = () => {
-    console.log(editField);
     if (editField === "password") {
       return (
         <form className="edit-user-container">
@@ -71,18 +125,17 @@ const Settings = () => {
             name={editField}
             className="input"
             placeholder="*************"
+            onChange={handlePasswordChange}
             required
           ></input>
 
           <div className="btn-center">
-            <button onClick={handlePasswordChange}>Save</button>
+            <button onClick={handleSavePassword}>Save</button>
             <button onClick={handleCancelChanges}>Cancel</button>
           </div>
         </form>
       );
     } else {
-      // TODO: updating password
-
       let placeholder;
       let title;
       if (editField === "firstName") {

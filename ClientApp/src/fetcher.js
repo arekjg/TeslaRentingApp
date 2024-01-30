@@ -115,3 +115,7 @@ export const putSignOut = (data) => {
 export const putUser = (data) => {
   return fetcherPut("api/users", data);
 };
+
+export const putPsw = (data) => {
+  return fetcherPut("api/users/psw", data);
+};

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CapacityIcon, RangeIcon, SeatIcon } from "./Icons";
+import { UserContext } from "../App";
 
 const Car = ({
   id,
@@ -15,6 +16,8 @@ const Car = ({
   pickUpLocation,
   returnLocation,
 }) => {
+  const { user } = useContext(UserContext);
+
   const pickUpDate = Date.parse(pickUpDateString);
   const returnDate = Date.parse(returnDateString);
   const daysCount = (returnDate - pickUpDate) / 1000 / 60 / 60 / 24 + 1;
@@ -22,9 +25,15 @@ const Car = ({
   const navigate = useNavigate();
 
   const handleReservation = () => {
-    navigate(
-      `/user?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}`
-    );
+    if (!user) {
+      navigate(
+        `/user?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}`
+      );
+    } else {
+      navigate(
+        `/summary?pickUpLocation=${pickUpLocation}&returnLocation=${returnLocation}&pickUpDate=${pickUpDateString}&returnDate=${returnDateString}&model=${id}&firstName=${user.firstName}&lastName=${user.lastName}&email=${user.email}&phone=${user.phone}`
+      );
+    }
   };
 
   return (

@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getLocation, getModel, postReservation, postUnregisteredUser } from "../fetcher";
+import {
+  getLocation,
+  getModel,
+  postReservation,
+  postUnregisteredUser,
+} from "../fetcher";
 import { CapacityIcon, RangeIcon, SeatIcon } from "./Icons";
+import { UserContext } from "../App";
 
 const Summary = () => {
+  const { user } = useContext(UserContext);
+
   const [startLocation, setStartLocation] = useState({
     errorMessage: "",
     data: [],
@@ -85,8 +93,13 @@ const Summary = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
 
-    const userResponseObject = await postUnregisteredUser(userData);
-    reservationData.userId = userResponseObject.data.id;
+    if (!user) {
+      const userResponseObject = await postUnregisteredUser(userData);
+      reservationData.userId = userResponseObject.data.id;
+    } else {
+      reservationData.userId = user.id;
+    }
+
     await postReservation(reservationData);
 
     navigate("/reservation");

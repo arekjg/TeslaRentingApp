@@ -12,7 +12,15 @@
 ## General information
 This is a car renting web application that simplifies the process of reserving a Tesla car. With this app, users can choose their pick-up and return dates, pick-up and return locations (which can be the same or different) and browse from a range of 10 Tesla car models.\
 The app calculates the cost of the rental and saves the reservation in the database.\
-The user can also create an account (register). Signing in is yet to be created.
+
+
+## Features
+- booking a car without an account
+- creating an account
+- signing in and booking a car with an account
+- editing user's data and password
+- browsing rental company's locations
+- managing booked reservations - **functionality still in progress**
 
 
 ## Technologies used

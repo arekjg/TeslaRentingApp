@@ -805,7 +805,7 @@ img#gh-icon {
 .edit-user-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 0.2fr 1fr;
+  grid-template-rows: 1fr 0.2fr 0.2fr 1fr;
   min-width: 300px;
   max-width: 350px;
   row-gap: 5px;
@@ -814,6 +814,7 @@ img#gh-icon {
   grid-template-areas:
   "header"
   "input"
+  "err"
   "btn";;
 }
 
@@ -822,6 +823,9 @@ img#gh-icon {
 }
 .edit-user-container .input {
   grid-area: input;
+}
+.edit-user-container .error-message {
+  grid-area: err;
 }
 .edit-user-container .btn-center {
   grid-area: btn;

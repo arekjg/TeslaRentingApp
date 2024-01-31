@@ -15,10 +15,12 @@ const Settings = () => {
     phone: user.phone,
   });
 
-  const [pswObj, setPassword] = useState({
+  const [passwordObject, setPasswordObject] = useState({
     id: user.id,
     password: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleEditClick = (field) => {
     setEditField(field);
@@ -38,7 +40,7 @@ const Settings = () => {
   const handlePasswordChange = async (e) => {
     let { name, value } = e.target;
 
-    setPassword((prevState) => {
+    setPasswordObject((prevState) => {
       return {
         ...prevState,
         [name]: value,
@@ -47,6 +49,7 @@ const Settings = () => {
   };
 
   const handleCancelChanges = () => {
+    setErrorMessage("");
     setEditField("");
   };
 
@@ -71,8 +74,8 @@ const Settings = () => {
     let isValid = validatePassword();
 
     if (isValid) {
-      console.log(pswObj);
-      const responseObject = await putPsw(pswObj);
+      console.log(passwordObject);
+      const responseObject = await putPsw(passwordObject);
 
       console.log(responseObject);
 
@@ -85,6 +88,7 @@ const Settings = () => {
 
   const validateEditForm = () => {
     let isValid = true;
+    setErrorMessage("");
 
     if (editField === "firstName" && updatedUser.firstName === "") {
       isValid = false;
@@ -97,19 +101,24 @@ const Settings = () => {
       isValid = false;
     }
 
-    // TODO: add error message
+    if (!isValid) {
+      setErrorMessage("Invalid or empty data");
+    }
 
     return isValid;
   };
 
   const validatePassword = () => {
     let isValid = true;
+    setErrorMessage("");
 
-    if (editField === "password" && pswObj.password === "") {
+    if (editField === "password" && passwordObject.password === "") {
       isValid = false;
     }
 
-    //TODO: add error message
+    if (!isValid) {
+      setErrorMessage("Invalid or empty data");
+    }
 
     return isValid;
   };
@@ -128,6 +137,10 @@ const Settings = () => {
             onChange={handlePasswordChange}
             required
           ></input>
+
+          {errorMessage && (
+            <div className="error-message">{errorMessage}</div>
+          )}
 
           <div className="btn-center">
             <button onClick={handleSavePassword}>Save</button>
@@ -161,6 +174,10 @@ const Settings = () => {
             onChange={handleFormChange}
             required
           ></input>
+
+          {errorMessage && (
+            <div className="error-message">{errorMessage}</div>
+          )}
 
           <div className="btn-center">
             <button onClick={handleSaveChanges}>Save</button>

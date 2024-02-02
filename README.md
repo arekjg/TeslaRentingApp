@@ -19,8 +19,8 @@ The app calculates the cost of the rental and saves the reservation in the datab
 - creating an account
 - signing in and booking a car with an account
 - editing user's data and password
+- displaying and deleting user's reservations
 - browsing rental company's locations
-- managing booked reservations - **functionality still in progress**
 
 
 ## Technologies used
@@ -33,6 +33,7 @@ The app calculates the cost of the rental and saves the reservation in the datab
 ![Search form](./img/screen1.PNG)
 ![Car picker](./img/screen2.PNG)
 ![Summary](./img/screen3.PNG)
+![Reservations](./img/screen4.PNG)
 
 
 ## Setup

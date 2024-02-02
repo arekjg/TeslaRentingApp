@@ -36,3 +36,9 @@ export const EditIcon = () => (
     <img src="../images/EditIcon.svg" className="edit-icon svg-icon" alt="" />
   </span>
 );
+
+export const TrashIcon = () => (
+  <span title="Delete">
+    <img src="../images/TrashIcon.svg" className="trash-icon" alt="" />
+  </span>
+);

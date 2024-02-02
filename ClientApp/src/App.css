@@ -128,7 +128,8 @@ a {
 .registration-container,
 .login-container,
 .settings-container,
-.edit-user-container {
+.edit-user-container,
+.reservations-list {
   background-color: var(--color-theme3);
   margin: auto;
   margin-top: 60px;
@@ -137,6 +138,16 @@ a {
   width: 80%;
   max-width: 800px;
   margin-bottom: 60px;
+}
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.error {
+  border: 2px solid red;
 }
 
 /*#region HomeComponent*/
@@ -220,7 +231,6 @@ a {
       "btn";
   }
 }
-/*#endregion*/
 
 .location-picker,
 .date-picker,
@@ -232,6 +242,7 @@ input {
   margin-left: auto;
   margin-right: auto;
 }
+/*#endregion*/
 
 /*#region Cars*/
 .cars-list {
@@ -243,7 +254,6 @@ input {
   grid-template-columns: 0.7fr 1fr 0.7fr;
   column-gap: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid var(--color-theme3);
   grid-template-areas: "car det cost";
   border-bottom: 1px solid var(--text-dark);
 }
@@ -256,11 +266,9 @@ input {
 .car-image {
   grid-area: car;
 }
-
 .car-details {
   grid-area: det;
 }
-
 .car-price {
   grid-area: cost;
   text-align: right;
@@ -485,16 +493,6 @@ input {
   min-width: 250px;
 }
 /*#endregion*/
-
-.error-message {
-  color: red;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.error {
-  border: 2px solid red;
-}
 
 /*#region Buttons*/
 button {
@@ -812,10 +810,10 @@ img#gh-icon {
   text-align: center;
   align-items: center;
   grid-template-areas:
-  "header"
-  "input"
-  "err"
-  "btn";;
+    "header"
+    "input"
+    "err"
+    "btn";
 }
 
 .edit-user-container h3 {
@@ -830,10 +828,92 @@ img#gh-icon {
 .edit-user-container .btn-center {
   grid-area: btn;
 }
+/*#endregion*/
 
-.edit-icon {
-  height: 15px;
-  transform: translateY(-2px);
+/*#region Reservations*/
+.reservations-list {
+  min-width: 330px;
+}
+
+.user-res-container {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 0.5fr;
+  grid-template-rows: 0.1fr 1fr;
+  column-gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--text-dark);
+  grid-template-areas:
+    "name det cost"
+    "car det cost";
+}
+
+.user-res-container:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.user-res-container h5 {
+  grid-area: name;
+  text-align: center;
+}
+.user-res-car {
+  grid-area: car;
+  text-align: center;
+}
+.user-res-details {
+  grid-area: det;
+}
+.user-res-price {
+  grid-area: cost;
+  text-align: right;
+  position: relative;
+}
+
+.user-res-cost {
+  position: absolute;
+  bottom: 60px;
+  right: 10px;
+}
+
+.user-res-delete {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+}
+
+.trash-icon {
+  height: 25px;
+  filter: invert(48%) sepia(14%) saturate(2508%) hue-rotate(313deg)
+    brightness(81%) contrast(107%);
+}
+
+.trash-icon:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .user-res-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1fr 0.2fr 0.2fr;
+    row-gap: 0;
+    grid-template-areas:
+      "name"
+      "car"
+      "det"
+      "cost";
+  }
+
+  .user-res-cost {
+    position: relative;
+    bottom: 0;
+    right: 30px;
+  }
+
+  .user-res-delete {
+    position: relative;
+    bottom: 0;
+    right: 0;
+  }
 }
 /*#endregion*/
 

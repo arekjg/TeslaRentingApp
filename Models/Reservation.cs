@@ -16,10 +16,14 @@ namespace TeslaRentingApp
         [Column("Res_DateEnd")]
         public int DateEnd { get; set; }
         [Column("Res_LocIdStart")]
-        public int LocIdStart { get; set; }
+        public int StartLocationId { get; set; }
         [Column("Res_LocIdEnd")]
-        public int LocIdEnd { get; set; }
+        public int EndLocationId { get; set; }
         [Column("Res_Cost", TypeName = "money")]
         public decimal Cost { get; set; }
+
+        public Model? Car { get; set; }
+        public Location? StartLocation { get; set; }
+        public Location? EndLocation { get; set; }
     }
 }

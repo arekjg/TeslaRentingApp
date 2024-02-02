@@ -60,6 +60,27 @@ const fetcherPut = async (url, data) => {
   return responseObject;
 };
 
+const fetcherDelete = async (url) => {
+  let responseObject = { errorMessage: "", data: [] };
+  try {
+    const response = await fetch(baseURL + url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    const responseData = await response.json();
+    responseObject.errorMessage = "";
+    responseObject.data = responseData;
+  } catch (error) {
+    responseObject.errorMessage = error.message;
+  }
+  return responseObject;
+};
+
 export const getCars = () => {
   return fetcherGet("api/cars");
 };
@@ -82,6 +103,10 @@ export const getModel = (id) => {
 
 export const getReservations = () => {
   return fetcherGet("api/reservations");
+};
+
+export const getUserReservations = (userId) => {
+  return fetcherGet(`api/reservations/users/${userId}`);
 };
 
 export const getReservation = (id) => {
@@ -118,4 +143,8 @@ export const putUser = (data) => {
 
 export const putPsw = (data) => {
   return fetcherPut("api/users/psw", data);
+};
+
+export const deleteReservation = (id) => {
+  return fetcherDelete(`api/reservations/${id}`);
 };

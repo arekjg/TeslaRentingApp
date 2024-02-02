@@ -23,18 +23,33 @@ namespace TeslaRentingApp
         {
             Reservation? reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
             
-            if (reservation != null)
+            if (reservation == null)
             {
-                _context.Reservations.Remove(reservation);
-                await _context.SaveChangesAsync();
+                return new List<Reservation>();
             }
 
-            return await _context.Reservations.ToListAsync();
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            return await _context.Reservations
+                .Include(r => r.Car)
+                .Include(r => r.StartLocation)
+                .Include(r => r.EndLocation)
+                .Where(r => r.UserId == reservation.UserId).ToListAsync();
         }
 
         public async Task<Reservation?> GetReservation(int id)
         {
             return await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<List<Reservation>> GetReservationsByUserId(int userId)
+        {
+            return await _context.Reservations
+                .Include(r => r.Car)
+                .Include(r => r.StartLocation)
+                .Include(r => r.EndLocation)
+                .Where(r => r.UserId == userId).ToListAsync();
         }
 
         public async Task<List<Reservation>> GetReservations()
@@ -51,8 +66,8 @@ namespace TeslaRentingApp
                 reservation.CarId = updatedReservation.CarId;
                 reservation.DateStart = updatedReservation.DateStart;
                 reservation.DateEnd = updatedReservation.DateEnd;
-                reservation.LocIdStart = updatedReservation.LocIdStart;
-                reservation.LocIdEnd = updatedReservation.LocIdEnd;
+                reservation.StartLocationId = updatedReservation.StartLocationId;
+                reservation.EndLocationId = updatedReservation.EndLocationId;
                 reservation.Cost = updatedReservation.Cost;
 
                 _context.Reservations.Update(reservation);

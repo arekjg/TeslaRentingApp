@@ -56,8 +56,8 @@ const Summary = () => {
     userId: null,
     dateStart: pickUpDate,
     dateEnd: returnDate,
-    locIdStart: pickUpLocation,
-    locIdEnd: returnLocation,
+    startLocationId: pickUpLocation,
+    endLocationId: returnLocation,
     cost: parseFloat((daysCount * model.data.pricePerDay).toFixed(2)),
   };
 

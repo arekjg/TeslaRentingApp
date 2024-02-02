@@ -40,6 +40,20 @@ namespace TeslaRentingApp
             }
         }
 
+        [HttpGet("users/{userId}")]
+        public async Task<IActionResult> GetReservationsByUserId(int userId)
+        {
+            try
+            {
+                var reservations = await _reservationRepository.GetReservationsByUserId(userId);
+                return Ok(reservations);
+            }
+            catch (Exception e)
+            {
+                return ResponseUtility.InternalServerError(e);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostReservation(Reservation reservation)
         {
@@ -72,8 +86,8 @@ namespace TeslaRentingApp
         {
             try
             {
-                var reservation = await _reservationRepository.GetReservation(id);
-                return ResponseUtility.OkOrNotFound(reservation);
+                var reservations = await _reservationRepository.DeleteReservation(id);
+                return ResponseUtility.OkOrNotFound(reservations);
             }
             catch (Exception e)
             {
